@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:36:07 by amouflet          #+#    #+#             */
-/*   Updated: 2023/03/29 03:22:24 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/03/29 03:24:36 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void	eat(t_philo *self)
 {
 	printf("%-7.03lli %i start thinking\n", gettime(self->start), self->index);
 	pthread_mutex_lock(self->left_fork_mutex);
+	printf("%-7.03lli %i has taken a fork\n", gettime(self->start), self->index);
 	pthread_mutex_lock(&self->fork_mutex);
+	printf("%-7.03lli %i has taken a fork\n", gettime(self->start), self->index);
 	self->last_meal = get_actual_time();
 	if (check_stop_bool(self))
 		return ;
