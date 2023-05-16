@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_time.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/15 10:42:49 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/16 18:56:05 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <unistd.h>
 #include <philo_struct.h>
 #include <philo_defines.h>
+
+void	wait_for_a_while(t_philo *self, t_case reason)
+{
+	
+}
 
 t_time	get_time_point(void)
 {
