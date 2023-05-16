@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 18:56:05 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:43:36 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,24 @@
 
 void	wait_for_a_while(t_philo *self, t_case reason)
 {
-	
+	if (reason == EAT)
+	{
+		while (get_timestamp_in_millisec(self->last_meal) < self->time_to_eat)
+		{
+			if (get_timestamp_in_millisec(self->last_meal) > self->time_to_die)
+			{
+				
+			}
+		}
+	}
+	else if (reason == SLEEP)
+	{
+
+	}
+	else if (reason == THINK)
+	{
+		
+	}
 }
 
 t_time	get_time_point(void)

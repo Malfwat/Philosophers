@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/15 11:02:57 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/16 19:40:47 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void    eat(t_philo *self)
     pthread_mutex_lock(&self->fork_mutex);
     pthread_mutex_lock(self->left_fork_mutex);
     printf("%-7.03lli %i Has taken a fork\n", get_timestamp_in_millisec(self->start), self->index);
-    
+    self->last_meal = get_time_point();
+    wait_for_a_while(self, EAT);
+    pthread_mutex_unlock(self->left_fork_mutex);
+    pthread_mutex_unlock(&self->fork_mutex);
 }
 
 void    simulation(t_philo *self)
