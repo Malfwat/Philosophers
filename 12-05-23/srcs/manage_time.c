@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 21:43:32 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:15:33 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <philo_struct.h>
 #include <philo_defines.h>
 #include <philosophers.h>
+#include <stdbool.h>
 
 t_time	get_time_point(void)
 {

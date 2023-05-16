@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 01:03:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 21:47:43 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:11:23 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <philo_defines.h>
 # include <philo_struct.h>
+# include <stdbool.h>
 
 t_time	get_time_point(void);
 t_time	get_timestamp_in_millisec(t_time start);

@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 21:57:40 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:39:27 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	think(t_philo *self)
 [
-	bool	leave_simulation;
+	int	leave_simulation;
 
 	leave_simulation = wait_for_a_while(self, THINK);
 	if (!leave_simulation)
@@ -25,7 +25,7 @@ void	think(t_philo *self)
 	return (eat(self));
 ]
 
-void    sleep(t_philo *self)
+void    philo_sleep(t_philo *self)
 {
 	bool    leave_simulation;
 
@@ -48,7 +48,7 @@ void    eat(t_philo *self)
 	pthread_mutex_unlock(&self->fork_mutex);
 	if (!leave_simulation)
 		return ;
-	return (sleep(self));
+	return (philo_sleep(self));
 }
 
 void    simulation(t_philo *self)
@@ -82,10 +82,9 @@ void    prelaunch(t_table table)
 		table.p_current = table.p_current->next;
 	}
 	i = 0;
-	while (table->p_current != table->p_begin || !i)
+	while (table.p_current != table.p_begin || !i++)
 	{
-			pthread_join(table->p_current->thread, NULL);
-			table->p_current = table->p_current->next;
-			go = false;
+			pthread_join(table.p_current->thread, NULL);
+			table.p_current = table.p_current->next;
 	}
 }
