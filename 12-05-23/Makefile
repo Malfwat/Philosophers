@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+         #
+#    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/24 16:24:44 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/13 00:15:13 by malfwa           ###   ########.fr        #
+#    Updated: 2023/05/16 21:46:38 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC_DIR	=	srcs/
 SRCS	=	create_table.c	\
 			manage_time.c	\
 			ft_atoi.c		\
+			simulation.c		\
+			check_death.c	\
 			utils.c			\
 			main.c
 
@@ -36,7 +38,7 @@ DEPS	=	$(OBJ:.o=.d)
 
 CC	=	cc
 
-CFLAGS	+=	-Wall -Wextra -Werror -MMD -MP -g3 -lpthread
+CFLAGS	+=	-Wall -Wextra -Werror -MMD -MP -g3 
 
 INC		=	includes/
 
@@ -58,7 +60,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I./$(INC)
 
 $(NAME):	Makefile $(OBJ_DIR) $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -o $(NAME) -lpthread
 
 clean:
 	rm -rf $(OBJ_DIR)

@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 19:43:36 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:43:32 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,7 @@
 #include <unistd.h>
 #include <philo_struct.h>
 #include <philo_defines.h>
-
-void	wait_for_a_while(t_philo *self, t_case reason)
-{
-	if (reason == EAT)
-	{
-		while (get_timestamp_in_millisec(self->last_meal) < self->time_to_eat)
-		{
-			if (get_timestamp_in_millisec(self->last_meal) > self->time_to_die)
-			{
-				
-			}
-		}
-	}
-	else if (reason == SLEEP)
-	{
-
-	}
-	else if (reason == THINK)
-	{
-		
-	}
-}
+#include <philosophers.h>
 
 t_time	get_time_point(void)
 {
@@ -64,5 +43,33 @@ void    synchronize_launch(t_time departure)
 
 t_time	get_departure_time(int table_len)
 {
-	return (get_time_point + LAUNCH_LAPS * table_len);
+	return (get_time_point() + LAUNCH_LAPS * (unsigned long long)table_len);
+}
+
+bool	wait_for_a_while(t_philo *self, t_case reason)
+{
+	t_time	period[2];
+	
+	period[0] = self->time_to_eat;
+	period[1] = self->time_to_sleep;
+	if (reason == EAT || reason == SLEEP)
+	{
+		while (get_timestamp_in_millisec(self->last_meal) < period[reason])
+		{
+			if (is_dead(self))
+				return (set_death(self), false);
+			if (have_to_quit(self))
+				return (false);
+			usleep(1000);
+		}
+	}
+	else if (reason == THINK)
+	{
+		if (is_dead(self))
+			return (set_death(self), false);
+		if (have_to_quit(self))
+			return (false);
+		printf("%-7.03lli %i Start thinking\n", get_timestamp_in_millisec(self->start), self->index);
+	}
+	return (true);
 }

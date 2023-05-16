@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:48:55 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/13 21:45:24 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/16 21:39:25 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
-#include <struct.h>
+#include <philo_struct.h>
 #include <string.h>
 #include <stdlib.h>
 
