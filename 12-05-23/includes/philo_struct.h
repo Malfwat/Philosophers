@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 23:58:02 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/13 00:36:28 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/13 23:32:51 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include <pthread.h>
 # include <stdbool.h>
-
-typedef unsigned long long t_time;
+# include <philo_defines.h>
 
 typedef struct s_philosopher
 {

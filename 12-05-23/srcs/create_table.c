@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:48:55 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/13 00:37:31 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/13 21:45:24 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,29 @@ int	add_philo(t_table *table,char **av, int index)
 
 t_table	*create_table(char **av)
 {
-	t_table	*new;
+	t_table	*table;
 	int		i;
 	bool	*boolean;
 	pthread_mutex_t mutex_stop;
 	
 	pthread_mutex_init(&mutex_stop, NULL);
-	new = malloc(sizeof(t_table));
-	if (!new)
+	table = malloc(sizeof(t_table));
+	if (!table)
 		return (NULL);
-	memset(new, 0, sizeof(t_table));
+	memset(table, 0, sizeof(t_table));
 	i = 0;
-	new->len = ft_atoi(av[1]);
-	while (i++ < new->len)
-		if (add_philo(new, av, i))
-			return (free_table(new), NULL);
+	table->len = ft_atoi(av[1]);
+	while (i++ < table->len)
+		if (add_philo(table, av, i))
+			return (free_table(table), NULL);
 	i = 0;
 	boolean = malloc(sizeof(bool));
 	memset(boolean, 0, sizeof(bool));
-	while (i++ < new->len)
+	while (i++ < table->len)
 	{
-		new->p_current->stop = boolean;
-		new->p_current->mutex_stop = &mutex_stop;
-		new->p_current = new->p_current->next;
+		table->p_current->stop = boolean;
+		table->p_current->mutex_stop = &mutex_stop;
+		table->p_current = table->p_current->next;
 	}
-	return (new);
+	return (table);
 }

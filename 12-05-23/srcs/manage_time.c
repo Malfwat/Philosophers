@@ -6,16 +6,17 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/13 00:38:21 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/15 10:42:49 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <struct.h>
+#include <philo_struct.h>
+#include <philo_defines.h>
 
-t_time	get_start(void)
+t_time	get_time_point(void)
 {
 	struct timeval tv;
 
@@ -33,15 +34,13 @@ t_time	get_timestamp_in_millisec(t_time start)
 	return ((tmp - start) / 1000);
 }
 
-/* #include <stdio.h>
-
-int main(void)
+void    synchronize_launch(t_time departure)
 {
-    t_time	start = get_start();
-    
-    printf("%llu\n", get_timestamp_in_millisec(start));
-    usleep(300000);
-    printf("%llu\n", get_timestamp_in_millisec(start));
-    usleep(300000);
-    printf("%llu\n", get_timestamp_in_millisec(start));
-} */
+    while (departure / 1000 != get_time_point() / 1000)
+        usleep(1000);
+}
+
+t_time	get_departure_time(int table_len)
+{
+	return (get_time_point + LAUNCH_LAPS * table_len);
+}

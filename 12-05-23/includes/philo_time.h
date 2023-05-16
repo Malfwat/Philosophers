@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo_time.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 18:20:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/14 01:05:45 by malfwa           ###   ########.fr       */
+/*   Created: 2023/05/14 01:03:44 by malfwa            #+#    #+#             */
+/*   Updated: 2023/05/15 10:43:52 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_TIME_H
+# define PHILO_TIME_H
 
-# include <struct.h>
 # include <philo_defines.h>
+# include <philo_struct.h>
 
-// ft_atoi.c
+t_time	get_time_point(void);
+t_time	get_timestamp_in_millisec(t_time start);
+void    synchronize_launch(t_time departure)
+t_time	get_departure_time(int table_len);
 
-int	ft_atoi(const char *nptr);
-
-// utils.c 
-
-bool	is_good_params(int ac, char **av);
-
-#endif /*PHILOSOPHERS_H*/
+#endif /* PHILO_TIME_H */

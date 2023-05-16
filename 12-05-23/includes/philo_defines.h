@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo_defines.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 18:20:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/14 01:05:45 by malfwa           ###   ########.fr       */
+/*   Created: 2023/05/13 23:31:51 by malfwa            #+#    #+#             */
+/*   Updated: 2023/05/15 10:42:39 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_DEFINES_H
+# define PHILO_DEFINES_H
 
-# include <struct.h>
-# include <philo_defines.h>
+typedef unsigned long long t_time;
 
-// ft_atoi.c
+// time given to launch one thread correctely before the similation do start
 
-int	ft_atoi(const char *nptr);
+# define LAUNCH_LAPS 150
 
-// utils.c 
-
-bool	is_good_params(int ac, char **av);
-
-#endif /*PHILOSOPHERS_H*/
+#endif /* PHILO_DEFINES_H */
