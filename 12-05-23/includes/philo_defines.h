@@ -6,14 +6,14 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 23:31:51 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 19:36:07 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:11:45 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_DEFINES_H
 # define PHILO_DEFINES_H
 
-typedef unsigned long long t_time;
+typedef long long t_time;
 
 // time given to launch one thread correctely before the similation do start
 

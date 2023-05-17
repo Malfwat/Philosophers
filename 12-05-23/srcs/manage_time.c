@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 22:15:33 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:45:22 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,64 @@ t_time	get_time_point(void)
 
 t_time	get_timestamp_in_millisec(t_time start)
 {
-	struct timeval		tv;
-	unsigned long long	tmp;
+	t_time	tmp;
 
-	gettimeofday(&tv, NULL);
-	tmp = tv.tv_sec * 1000000 + tv.tv_usec;
+	tmp = get_time_point();
 	return ((tmp - start) / 1000);
 }
 
 void    synchronize_launch(t_time departure)
 {
-    while (departure / 1000 != get_time_point() / 1000)
-        usleep(1000);
+    while (departure / 1000 > get_time_point() / 1000);
 }
 
 t_time	get_departure_time(int table_len)
 {
-	return (get_time_point() + LAUNCH_LAPS * (unsigned long long)table_len);
+	return (get_time_point() + (LAUNCH_LAPS * (unsigned long long)table_len));
 }
 
 bool	wait_for_a_while(t_philo *self, t_case reason)
 {
-	t_time	period[2];
-	
-	period[0] = self->time_to_eat;
-	period[1] = self->time_to_sleep;
-	if (reason == EAT || reason == SLEEP)
+	t_time	time_point_sleep;
+	t_time	timestamp_from_start;
+	bool	print;
+
+	if (reason == EAT)
 	{
-		while (get_timestamp_in_millisec(self->last_meal) < period[reason])
+		timestamp_from_start = get_timestamp_in_millisec(self->start);
+		print = true;
+		while (get_timestamp_in_millisec(self->last_meal) < self->time_to_eat)
 		{
 			if (is_dead(self))
 				return (set_death(self), false);
 			if (have_to_quit(self))
 				return (false);
-			usleep(1000);
+			if (print)
+				printf("%-7.03lli %i Has taken a fork\n", get_timestamp_in_millisec(self->start), self->index);
+			print = false;
+		}
+	}
+	else if (reason == SLEEP)
+	{
+		time_point_sleep = get_time_point();
+		timestamp_from_start = get_timestamp_in_millisec(self->start);
+		printf("%-7.03lli %i Start sleeping\n", timestamp_from_start, self->index);
+		while (get_timestamp_in_millisec(time_point_sleep) < self->time_to_sleep)
+		{
+			if (is_dead(self))
+				return (set_death(self), false);
+			if (have_to_quit(self))
+				return (false);
 		}
 	}
 	else if (reason == THINK)
 	{
+		timestamp_from_start = get_timestamp_in_millisec(self->start);
+		printf("%-7.03lli %i Start thinking\n", timestamp_from_start, self->index);
 		if (is_dead(self))
 			return (set_death(self), false);
 		if (have_to_quit(self))
 			return (false);
-		printf("%-7.03lli %i Start thinking\n", get_timestamp_in_millisec(self->start), self->index);
 	}
 	return (true);
 }
