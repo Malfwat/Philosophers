@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 23:58:02 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/13 23:32:51 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 00:35:47 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_philosopher
 	t_time					last_meal;
 	t_time					actual_time;
 	pthread_t               thread;
-	pthread_mutex_t         *mutex_stop;
+	pthread_mutex_t         mutex_stop;
+	pthread_mutex_t         mutex_print;
 	pthread_mutex_t         fork_mutex;
 	pthread_mutex_t         *left_fork_mutex;
 	struct s_philosopher    *prev;

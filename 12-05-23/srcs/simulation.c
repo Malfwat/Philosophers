@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/17 19:16:18 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/20 00:00:38 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	think(t_philo *self)
 
 	leave_simulation = wait_for_a_while(self, THINK);
 	if (!leave_simulation)
-		exit ;
+		return ;
 	return (eat(self));
 }
 
@@ -35,7 +35,7 @@ void    philo_sleep(t_philo *self)
 
 	leave_simulation = wait_for_a_while(self, SLEEP);
 	if (!leave_simulation)
-		exit ;
+		return ;
 	return (think(self));
 }
 	
@@ -50,7 +50,7 @@ void    eat(t_philo *self)
 	pthread_mutex_unlock(self->left_fork_mutex);
 	pthread_mutex_unlock(&self->fork_mutex);
 	if (!leave_simulation)
-		exit ;
+		return ;
 	return (philo_sleep(self));
 }
 
@@ -69,30 +69,31 @@ void	*routine(void *addr)
 	t_philo *philo;
 
 	philo = (t_philo *)addr;
+	printf("my_id: %i\n", philo->index);
 	synchronize_launch(philo->start);
 	simulation(philo);
 	return (NULL);
 }
 
-void    prelaunch(t_table table)
+void    prelaunch(t_table *table)
 {
 	int     i;
 	t_time  departure;
 	
 	i = 0;
-	departure = get_departure_time(table.len);
-	// table.p_current = table.p_begin;
-	while (!i++ || table.p_current != table.p_begin)
+	departure = get_departure_time(table->len);
+	table->p_current = table->p_begin;
+	while (!i++ || table->p_current != table->p_begin)
 	{
-		table.p_current->start = departure;
-		table.p_current->last_meal = departure;
-		pthread_create(&table.p_current->thread, NULL, routine, table.p_current);
-		table.p_current = table.p_current->next;
+		table->p_current->start = departure;
+		table->p_current->last_meal = departure;
+		pthread_create(&table->p_current->thread, NULL, routine, table->p_current);
+		table->p_current = table->p_current->next;
 	}
 	i = 0;
-	while (table.p_current != table.p_begin || !i++)
+	while (table->p_current != table->p_begin || !i++)
 	{
-		pthread_join(table.p_current->thread, NULL);
-		table.p_current = table.p_current->next;
+		pthread_join(table->p_current->thread, NULL);
+		table->p_current = table->p_current->next;
 	}
 }

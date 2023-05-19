@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:20:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 22:11:52 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/19 23:54:32 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 // simulation
 
-void    prelaunch(t_table table);
+void    prelaunch(t_table *table);
 
 // ft_atoi.c
 
@@ -35,5 +35,7 @@ bool	is_good_params(int ac, char **av);
 bool	have_to_quit(t_philo *self);
 bool	is_dead(t_philo *self);
 void	set_death(t_philo *self);
+
+void	print_mutex(t_philo *self, char *str);
 
 #endif /*PHILOSOPHERS_H*/

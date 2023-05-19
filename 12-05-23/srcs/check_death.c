@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_death.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:44:40 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/17 18:29:16 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/20 00:36:50 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 
 void	set_death(t_philo *self)
 {
-	usleep(10);
-	pthread_mutex_lock(self->mutex_stop);
+	// usleep(10);
+	pthread_mutex_lock(&self->mutex_stop);
 	*self->stop = true;
-	pthread_mutex_unlock(self->mutex_stop);
-	// printf("%-7.03lli %i Died\n", get_timestamp_in_millisec(self->start), self->index);
+	pthread_mutex_unlock(&self->mutex_stop);
+	print_mutex(self, "Died");
+	// printf("Died\n");
 }
 
 bool	is_dead(t_philo *self)
@@ -35,13 +36,13 @@ bool	is_dead(t_philo *self)
 
 bool	have_to_quit(t_philo *self)
 {
-	bool	exit_value;
+	bool	return_value;
 
-	exit_value = false;
+	return_value = false;
 	usleep(10);
-	pthread_mutex_lock(self->mutex_stop);
+	pthread_mutex_lock(&self->mutex_stop);
 	if (*self->stop)
-		exit_value = true;
-	pthread_mutex_unlock(self->mutex_stop);
-	return (exit_value);
+		return_value = true;
+	pthread_mutex_unlock(&self->mutex_stop);
+	return (return_value);
 }
