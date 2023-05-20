@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 23:58:02 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 15:38:19 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 17:51:49 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ typedef struct s_philosopher
 	t_time					time_to_sleep;
 	int                     number_of_meal_needed;
 	int                     number_of_meal_eaten;
-	t_time					start;
+	// t_time					start;
 	t_time					last_meal;
 	pthread_t               thread;
 	pthread_mutex_t         self_mutex;
 	pthread_mutex_t         stop_mutex;
-	pthread_mutex_t         print_mutex;
 	pthread_mutex_t         fork_mutex;
 	pthread_mutex_t         *left_fork_mutex;
 	struct s_philosopher    *prev;
@@ -41,6 +40,8 @@ typedef struct s_philosopher
 typedef struct s_philo_mutex_couple
 {
 	t_philo						*philo;
+	t_time						start;
+	pthread_mutex_t				print_mutex;
 	pthread_mutex_t				mutex_philo;
 	struct s_philo_mutex_couple	*next;
 }t_pairs;

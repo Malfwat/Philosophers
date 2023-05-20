@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 16:20:22 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 18:34:31 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ t_time	get_timestamp_in_millisec(t_time start)
 bool    synchronize_launch(t_pairs *self)
 {
 	t_time	start;
-	t_philo	*philo;
 
-	pthread_mutex_lock(&self->mutex_philo);
-	start = philo->start;
-	pthread_mutex_unlock(&self->mutex_philo);
+	start = self->start;
     while (start / 1000 > get_time_point() / 1000)
 		if (have_to_quit(self))
 			return (false);
@@ -53,19 +50,23 @@ t_time	get_departure_time(int table_len)
 	return (get_time_point() + (LAUNCH_LAPS * (t_time)table_len));
 }
 
-bool	wait_for_a_while(t_philo *self, t_case reason)
+bool	wait_for_a_while(t_pairs *self, t_case reason)
 {
 	t_time	time_point;
+	t_time	duration;
 	bool	print;
 
 	print = true;
 	if (reason == EAT || reason == SLEEP)
 	{
-		time_point = (t_time []){self->last_meal, get_time_point()}[reason];
-		while (get_timestamp_in_millisec(time_point) < self->time_to_eat)
+		pthread_mutex_lock(&self->mutex_philo);
+		duration = (t_time []){self->philo->time_to_eat, self->philo->time_to_sleep}[reason];
+		time_point = (t_time []){self->philo->last_meal, get_time_point()}[reason];
+		pthread_mutex_unlock(&self->mutex_philo);
+		while (get_timestamp_in_millisec(time_point) < duration)
 		{
-			if (is_dead(self))
-				return (set_death(self), false);
+			// if (is_dead(self))
+			// 	return (set_death(self), false);
 			if (have_to_quit(self))
 				return (false);
 			if (print)
@@ -76,8 +77,8 @@ bool	wait_for_a_while(t_philo *self, t_case reason)
 	else if (reason == THINK)
 	{
 		my_print(self, "is thinking");
-		if (is_dead(self))
-			return (set_death(self), false);
+		// if (is_dead(self))
+		// 	return (set_death(self), false);
 		if (have_to_quit(self))
 			return (false);
 	}

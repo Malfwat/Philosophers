@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:48:55 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 04:59:43 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 18:16:51 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ t_table	*create_table(char **av)
 	{
 		table->p_current->stop = boolean;
 		table->p_current->stop_mutex = table->stop_mutex;
-		table->p_current->print_mutex = table->print_mutex;
 		table->p_current = table->p_current->next;
 	}
 	return (table);

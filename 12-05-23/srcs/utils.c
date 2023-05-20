@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 15:36:15 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 18:28:19 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
 #include <philo_time.h>
 #include <philo_struct.h>
 
-void	my_print(t_philo *self, char *str)
+void	my_print(t_pairs *self, char *str)
 {
 	t_time	time;
+	t_philo	*philo;
 
 	time = get_timestamp_in_millisec(self->start);
+	pthread_mutex_lock(&self->mutex_philo);
+	philo = self->philo;
 	pthread_mutex_lock(&self->print_mutex);
-	printf("%-7.03lli %i %s\n", time, self->index, str);
+	printf("%-7.03lli %i %s\n", time, philo->index, str);
 	pthread_mutex_unlock(&self->print_mutex);
+	pthread_mutex_unlock(&self->mutex_philo);
 }
 
 static bool	ft_is_digit(char c)
@@ -31,13 +35,6 @@ static bool	ft_is_digit(char c)
 	if (c < '0' || c > '9')
 		return (false);
 	return (true);
-}
-
-t_pairs	*get_pair(t_pairs *lst, t_philo *to_find)
-{
-	while (lst->philo != to_find)
-		lst = lst->next;
-	return (lst);
 }
 
 bool	is_good_params(int ac, char **av)
