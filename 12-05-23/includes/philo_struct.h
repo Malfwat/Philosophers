@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 23:58:02 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 19:52:40 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 21:20:37 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 typedef struct s_philosopher
 {
 	bool					*stop;
+	bool					done_eating;
 	int                     index;
-	t_time					time_to_die;
-	t_time					time_to_eat;
-	t_time					time_to_sleep;
 	int                     number_of_meal_needed;
 	int                     number_of_meal_eaten;
-	// t_time					start;
+	t_time					time_to_eat;
+	t_time					time_to_die;
+	t_time					time_to_sleep;
 	t_time					last_meal;
 	pthread_t               thread;
 	pthread_mutex_t         self_mutex;

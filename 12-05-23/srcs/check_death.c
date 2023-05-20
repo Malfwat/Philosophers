@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:44:40 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/20 18:33:15 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 21:02:41 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ bool	is_dead(t_pairs *self)
 		return (false);
 	pthread_mutex_lock(&self->mutex_philo);
 	philo = self->philo;
+	if (philo->done_eating)
+		return (false);
 	if (get_timestamp_in_millisec(philo->last_meal) > philo->time_to_die)
 	{
 		pthread_mutex_unlock(&self->mutex_philo);

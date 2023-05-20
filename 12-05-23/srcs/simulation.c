@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 20:09:31 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 21:18:54 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void    philo_sleep(t_pairs *self)
 {
 	bool    leave_simulation;
 
+	my_print(self, "left eating");
 	leave_simulation = wait_for_a_while(self, SLEEP);
 	if (!leave_simulation)
 		return ;
@@ -48,18 +49,18 @@ void    eat(t_pairs *self)
 
 	pthread_mutex_lock(&self->mutex_philo);
 	philo = self->philo;
-	if (philo->index % 2)
-	{
+	// if (philo->index % 2)
+	// {
 		pthread_mutex_lock(&philo->fork_mutex);
 		my_print(self, "Has taken a fork");
 		pthread_mutex_lock(philo->left_fork_mutex);
-	}
-	else 
-	{
-		pthread_mutex_lock(philo->left_fork_mutex);
-		my_print(self, "Has taken a fork");
-		pthread_mutex_lock(&philo->fork_mutex);
-	}
+	// }
+	// else 
+	// {
+		// pthread_mutex_lock(philo->left_fork_mutex);
+		// my_print(self, "Has taken a fork");
+		// pthread_mutex_lock(&philo->fork_mutex);
+	// }
 	time_now = get_time_point();
 	philo->last_meal = (t_time []){time_now, self->start}[(time_now < self->start)];
 	philo->number_of_meal_eaten += 1;
@@ -71,11 +72,15 @@ void    eat(t_pairs *self)
 	{
 		return ;
 	}
+	pthread_mutex_lock(&self->mutex_philo);
 	if (philo->number_of_meal_needed != INFINITE \
 		&& philo->number_of_meal_eaten == philo->number_of_meal_needed)
 	{
+		philo->done_eating = true;
+		pthread_mutex_unlock(&self->mutex_philo);
 		return ;
 	}
+	pthread_mutex_unlock(&self->mutex_philo);
 	return (philo_sleep(self));
 }
 
@@ -130,11 +135,24 @@ void	make_unlink_loop(t_pairs *lst, bool mode)
 	}
 }
 
+t_pairs	*copy_listpairs(t_pairs *original)
+{
+	t_pairs	*new;
+
+	new = NULL;
+	while (original)
+	{
+		add_pairs()
+		original = original->next;
+	}
+}
+
 void	*supervisor(void *addr)
 {
 	int		i;
 	t_table	*table;
 	t_pairs	*tmp;
+	t_pairs	*copy;
 
 	table = (t_table *)addr;
 	tmp = table->lst_of_pairs;
@@ -150,12 +168,14 @@ void	*supervisor(void *addr)
 			return (set_death(tmp), NULL);
 		tmp = tmp->next;
 	}
+	copy = copy_listpairs(table->lst_of_pairs);
 	make_unlink_loop(table->lst_of_pairs, false);
 	while (table->lst_of_pairs)
 	{
 		usleep(200);
 		if (is_dead(table->lst_of_pairs))
 			return (make_unlink_loop(NULL, true), set_death(table->lst_of_pairs), NULL);
+		if 
 		table->lst_of_pairs = table->lst_of_pairs->next;
 	}
 	return (NULL);
