@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 04:15:48 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 13:59:14 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,20 @@ void	*routine(void *addr)
 void    prelaunch(t_table *table)
 {
 	int     i;
+	t_pairs	*tmp;
 	t_time  departure;
 	
 	i = 0;
 	departure = get_departure_time(table->len);
 	table->p_current = table->p_begin;
-	while (!i++ || table->p_current != table->p_begin)
+	tmp = table->lst_of_pairs;
+	while (tmp)
 	{
-		table->p_current->start = departure;
-		table->p_current->last_meal = departure;
-		if (pthread_create(&table->p_current->thread, NULL, routine, table->p_current))
-			return (set_death(table->p_current));
-		table->p_current = table->p_current->next;
+		tmp->philo->start = departure;
+		tmp->philo->last_meal = departure;
+		if (pthread_create(&tmp->philo->thread, NULL, routine, tmp))
+			return (set_death(tmp->philo));
+		tmp = tmp->next;
 	}
 	i = 0;
 	while (table->p_current != table->p_begin || !i++)

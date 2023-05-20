@@ -2,3 +2,6 @@
 also put a static function to be sure that only one person is gonna die
 
 -adapt the code with the usage of t_pairs it would change everything and u gonna finished well with this fucking mandatory
+
+- think to  check what happens when you try to join a thread qlready finished 
+if it's okay to do that then the supervisor will
