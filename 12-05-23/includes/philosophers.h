@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:20:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/19 23:54:32 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 04:15:48 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ bool	have_to_quit(t_philo *self);
 bool	is_dead(t_philo *self);
 void	set_death(t_philo *self);
 
-void	print_mutex(t_philo *self, char *str);
+void	my_print(t_philo *self, char *str);
 
 #endif /*PHILOSOPHERS_H*/

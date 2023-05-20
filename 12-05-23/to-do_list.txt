@@ -1,0 +1,2 @@
+-Kind of supervisor which is gonna check if sombody died if its the case it would set the boolean stop to true then everybody is gonna leave, 
+also put a static function to be sure that only one person is gonna die

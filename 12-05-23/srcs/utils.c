@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 00:37:28 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 04:41:50 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <philo_time.h>
 #include <philo_struct.h>
 
-void	print_mutex(t_philo *self, char *str)
+void	my_print(t_philo *self, char *str)
 {
 	t_time	time;
 
 	time = get_timestamp_in_millisec(self->start);
-	pthread_mutex_lock(&self->mutex_print);
+	pthread_mutex_lock(&self->print_mutex);
 	printf("%-7.03lli %i %s\n", time, self->index, str);
-	pthread_mutex_unlock(&self->mutex_print);
+	pthread_mutex_unlock(&self->print_mutex);
 }
 
 static bool	ft_is_digit(char c)

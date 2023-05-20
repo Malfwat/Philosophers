@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:48:55 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 00:35:36 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 04:59:43 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 void    free_table(t_table *table)
 {
+	t_pairs	*tmp;
+
 	if (!table)
 		return ;
 	table->p_end->next = NULL;
@@ -26,8 +28,17 @@ void    free_table(t_table *table)
 		table->p_current = table->p_begin;
 		table->p_begin = table->p_begin->next;
 		pthread_mutex_destroy(&table->p_current->fork_mutex);
+		pthread_mutex_destroy(&table->p_current->self_mutex);
 		free(table->p_current);
 	}
+	while (table->lst_of_pairs)
+	{
+		tmp = table->lst_of_pairs;
+		table->lst_of_pairs = table->lst_of_pairs->next;
+		free(tmp);
+	}
+	pthread_mutex_destroy(&table->print_mutex);
+	pthread_mutex_destroy(&table->stop_mutex);
 	free(table);
 }
 
@@ -45,16 +56,50 @@ t_philo	*new_philo(char **av, int index)
 	new->number_of_meal_needed = (int []){ft_atoi(av[5]) , -1}[(av[5] == NULL)];
 	new->index = index;
 	pthread_mutex_init(&new->fork_mutex, NULL);
+	pthread_mutex_init(&new->self_mutex, NULL);
 	return (new);
 }
 
-int	add_philo(t_table *table,char **av, int index)
+t_pairs	*new_pairs(t_philo *philo)
+{
+	t_pairs	*new;
+	
+	new = malloc(sizeof(t_pairs));
+	if (!new)
+		return (new);
+	new->mutex_philo = philo->self_mutex;
+	new->philo = philo;
+	new->next = NULL;
+	return (new);
+}
+
+bool	add_pairs(t_table *table, t_philo *philo)
+{
+	t_pairs	*new;
+	t_pairs	*tmp;
+
+	new = new_pairs(philo);
+	if (!new)
+		return (false);
+	if (!table->lst_of_pairs)
+		table->lst_of_pairs = new;
+	else
+	{
+		tmp = table->lst_of_pairs;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	return (true);
+}
+
+bool	add_philo(t_table *table,char **av, int index)
 {
 	t_philo	*new;
 
 	new = new_philo(av, index);
-	if (!new)
-		return (2);
+	if (!new || !add_pairs(table, new))
+		return (free(new), false);
 	if (!table->p_begin)
 	{
 		table->p_begin = new;
@@ -71,13 +116,11 @@ int	add_philo(t_table *table,char **av, int index)
 	}
 	table->p_begin->prev = table->p_end;
 	new->next = table->p_begin;
-	return (0);
+	return (true);
 }
 
 t_table	*create_table(char **av)
 {
-	pthread_mutex_t	mutex_stop;
-	pthread_mutex_t	mutex_print;
 	t_table			*table;
 	int				i;
 	bool			*boolean;
@@ -86,12 +129,12 @@ t_table	*create_table(char **av)
 	if (!table)
 		return (NULL);
 	memset(table, 0, sizeof(t_table));
-	pthread_mutex_init(&mutex_stop, NULL);
-	pthread_mutex_init(&mutex_print, NULL);
+	pthread_mutex_init(&table->stop_mutex, NULL);
+	pthread_mutex_init(&table->print_mutex, NULL);
 	i = 0;
 	table->len = ft_atoi(av[1]);
 	while (i++ < table->len)
-		if (add_philo(table, av, i))
+		if (!add_philo(table, av, i))
 			return (free_table(table), NULL);
 	i = 0;
 	boolean = malloc(sizeof(bool));
@@ -101,8 +144,8 @@ t_table	*create_table(char **av)
 	while (i++ < table->len)
 	{
 		table->p_current->stop = boolean;
-		table->p_current->mutex_stop = mutex_stop;
-		table->p_current->mutex_print = mutex_print;
+		table->p_current->stop_mutex = table->stop_mutex;
+		table->p_current->print_mutex = table->print_mutex;
 		table->p_current = table->p_current->next;
 	}
 	return (table);

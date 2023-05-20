@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 03:56:44 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 04:27:16 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ t_time	get_departure_time(int table_len)
 {
 	return (get_time_point() + (LAUNCH_LAPS * (t_time)table_len));
 }
-
+/* 
 bool	wait_for_a_while(t_philo *self, t_case reason)
 {
 	t_time	time_point_sleep;
 	bool	print;
 
+	print = true;
 	if (reason == EAT)
 	{
-		print = true;
 		while (get_timestamp_in_millisec(self->last_meal) < self->time_to_eat)
 		{
 			if (is_dead(self))
@@ -62,25 +62,60 @@ bool	wait_for_a_while(t_philo *self, t_case reason)
 			if (have_to_quit(self))
 				return (false);
 			if (print)
-				print_mutex(self, "Has taken a fork");
+				my_print(self, "is eating");
 			print = false;
 		}
 	}
 	else if (reason == SLEEP)
 	{
 		time_point_sleep = get_time_point();
-		print_mutex(self, "Start sleeping");
+		// my_print(self, );
 		while (get_timestamp_in_millisec(time_point_sleep) < self->time_to_sleep)
 		{
 			if (is_dead(self))
 				return (set_death(self), false);
 			if (have_to_quit(self))
 				return (false);
+			if (print)
+				my_print(self, "Start sleeping");
+			print = false;
 		}
 	}
 	else if (reason == THINK)
 	{
-		print_mutex(self, "Start thinking");
+		my_print(self, "Start thinking");
+		if (is_dead(self))
+			return (set_death(self), false);
+		if (have_to_quit(self))
+			return (false);
+	}
+	return (true);
+} */
+
+
+bool	wait_for_a_while(t_philo *self, t_case reason)
+{
+	t_time	time_point;
+	bool	print;
+
+	print = true;
+	if (reason == EAT || reason == SLEEP)
+	{
+		time_point = (t_time []){self->last_meal, get_time_point()}[reason];
+		while (get_timestamp_in_millisec(time_point) < self->time_to_eat)
+		{
+			if (is_dead(self))
+				return (set_death(self), false);
+			if (have_to_quit(self))
+				return (false);
+			if (print)
+				my_print(self, (char *[]){"is eating", "is sleeping"}[reason]);
+			print = false;
+		}
+	}
+	else if (reason == THINK)
+	{
+		my_print(self, "is thinking");
 		if (is_dead(self))
 			return (set_death(self), false);
 		if (have_to_quit(self))

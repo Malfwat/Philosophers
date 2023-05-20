@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:44:40 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/20 02:33:25 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 04:41:36 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@
 
 void	set_death(t_philo *self)
 {
-	pthread_mutex_lock(&self->mutex_stop);
+	pthread_mutex_lock(&self->stop_mutex);
 	*self->stop = true;
-	pthread_mutex_unlock(&self->mutex_stop);
-	print_mutex(self, "Died");
+	pthread_mutex_unlock(&self->stop_mutex);
+	my_print(self, "Died");
 }
 
 bool	is_dead(t_philo *self)
 {
+	static bool somebody_is_dead;
+	
+	if (somebody_is_dead)
+		return (false);
 	if (get_timestamp_in_millisec(self->last_meal) > self->time_to_die)
-		return (true);
+		return (somebody_is_dead = true, true);
 	return (false);
 }
 
@@ -38,9 +42,9 @@ bool	have_to_quit(t_philo *self)
 
 	return_value = false;
 	// usleep(10);
-	pthread_mutex_lock(&self->mutex_stop);
+	pthread_mutex_lock(&self->stop_mutex);
 	if (*self->stop)
 		return_value = true;
-	pthread_mutex_unlock(&self->mutex_stop);
+	pthread_mutex_unlock(&self->stop_mutex);
 	return (return_value);
 }
