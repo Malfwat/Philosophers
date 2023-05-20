@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:44:40 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/20 02:23:03 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 02:33:25 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	have_to_quit(t_philo *self)
 	bool	return_value;
 
 	return_value = false;
-	usleep(10);
+	// usleep(10);
 	pthread_mutex_lock(&self->mutex_stop);
 	if (*self->stop)
 		return_value = true;

@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 02:27:59 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 02:33:46 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	simulation(t_philo *self)
 {
 	if (self->index % 2)
 	{
-		usleep(100);
+		usleep(10);
 		think(self);
 	}
 	else
