@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:44:40 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/20 00:36:50 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 02:23:03 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@
 
 void	set_death(t_philo *self)
 {
-	// usleep(10);
 	pthread_mutex_lock(&self->mutex_stop);
 	*self->stop = true;
 	pthread_mutex_unlock(&self->mutex_stop);
 	print_mutex(self, "Died");
-	// printf("Died\n");
 }
 
 bool	is_dead(t_philo *self)

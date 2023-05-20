@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 02:21:21 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 02:27:59 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	simulation(t_philo *self)
 		usleep(100);
 		think(self);
 	}
-	eat(self);
+	else
+		eat(self);
 }
 
 void	*routine(void *addr)
