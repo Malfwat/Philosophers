@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 04:41:50 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 05:07:45 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static bool	ft_is_digit(char c)
 	if (c < '0' || c > '9')
 		return (false);
 	return (true);
+}
+
+t_pairs	*get_pair(t_pairs *lst, t_philo *to_find)
+{
+	while (lst != to_find)
+		lst = lst->next;
+	return (lst);
 }
 
 bool	is_good_params(int ac, char **av)

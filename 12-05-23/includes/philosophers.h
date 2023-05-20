@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:20:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 04:15:48 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 05:08:00 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ bool	is_dead(t_philo *self);
 void	set_death(t_philo *self);
 
 void	my_print(t_philo *self, char *str);
+t_pairs	*get_pair(t_pairs *lst, t_philo *to_find);
 
 #endif /*PHILOSOPHERS_H*/

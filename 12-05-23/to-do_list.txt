@@ -1,2 +1,4 @@
 -Kind of supervisor which is gonna check if sombody died if its the case it would set the boolean stop to true then everybody is gonna leave, 
 also put a static function to be sure that only one person is gonna die
+
+-adapt the code with the usage of t_pairs it would change everything and u gonna finished well with this fucking mandatory
