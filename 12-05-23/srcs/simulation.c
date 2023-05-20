@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 16:28:00 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 16:46:04 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,35 @@ void    philo_sleep(t_philo *self)
 	return (think(self));
 }
 	
-void    eat(t_philo *self)
+void    eat(t_pairs *self)
 {
 	bool    leave_simulation;
 	t_time	time_now;
+	t_philo	*philo;
 
-	pthread_mutex_lock(&self->fork_mutex);
-	my_print(self, "Has taken a fork");
-	pthread_mutex_lock(self->left_fork_mutex);
+	pthread_mutex_lock(&self->mutex_philo);
+	pthread_mutex_lock(&philo->fork_mutex);
+	my_print(philo, "Has taken a fork");
+	pthread_mutex_lock(philo->left_fork_mutex);
 	time_now = get_time_point();
-	self->last_meal = (t_time []){time_now, self->start}[(time_now < self->start)];
-	self->number_of_meal_eaten += 1;
-	leave_simulation = wait_for_a_while(self, EAT);
-	pthread_mutex_unlock(self->left_fork_mutex);
-	pthread_mutex_unlock(&self->fork_mutex);
+	philo->last_meal = (t_time []){time_now, philo->start}[(time_now < philo->start)];
+	philo->number_of_meal_eaten += 1;
+	leave_simulation = wait_for_a_while(philo, EAT);
+	pthread_mutex_unlock(philo->left_fork_mutex);
+	pthread_mutex_unlock(&philo->fork_mutex);
 	if (!leave_simulation)
+	{
+		pthread_mutex_unlock(&self->mutex_philo);
 		return ;
-	if (self->number_of_meal_needed != INFINITE \
-		&& self->number_of_meal_eaten == self->number_of_meal_needed)
+	}
+	if (philo->number_of_meal_needed != INFINITE \
+		&& philo->number_of_meal_eaten == philo->number_of_meal_needed)
+	{
+		pthread_mutex_unlock(&self->mutex_philo);
 		return ;
-	return (philo_sleep(self));
+	}
+	pthread_mutex_unlock(&self->mutex_philo);
+	return (philo_sleep(philo));
 }
 
 void	simulation(t_pairs *self)
