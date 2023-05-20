@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:48:55 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 18:16:51 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 19:54:46 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ void    free_table(t_table *table)
 		pthread_mutex_destroy(&table->p_current->self_mutex);
 		free(table->p_current);
 	}
-	while (table->lst_of_pairs)
+	while (table->lst_of_pairs_begin)
 	{
-		tmp = table->lst_of_pairs;
-		table->lst_of_pairs = table->lst_of_pairs->next;
+		tmp = table->lst_of_pairs_begin;
+		table->lst_of_pairs_begin = table->lst_of_pairs_begin->next;
 		free(tmp);
 	}
+	free(table->arg);
 	pthread_mutex_destroy(&table->print_mutex);
 	pthread_mutex_destroy(&table->stop_mutex);
 	free(table);
@@ -53,7 +54,7 @@ t_philo	*new_philo(char **av, int index)
 	new->time_to_die = ft_atoi(av[2]);
 	new->time_to_eat = ft_atoi(av[3]);
 	new->time_to_sleep = ft_atoi(av[4]);
-	new->number_of_meal_needed = (int []){ft_atoi(av[5]) , -1}[(av[5] == NULL)];
+	new->number_of_meal_needed = (int []){ft_atoi(av[5]) , INFINITE}[(av[5] == NULL)];
 	new->index = index;
 	pthread_mutex_init(&new->fork_mutex, NULL);
 	pthread_mutex_init(&new->self_mutex, NULL);
@@ -140,7 +141,8 @@ t_table	*create_table(char **av)
 	boolean = malloc(sizeof(bool));
 	if (!boolean)
 			return (free_table(table), NULL);
-	*boolean = false;	
+	*boolean = false;
+	table->lst_of_pairs_begin = table->lst_of_pairs;
 	while (i++ < table->len)
 	{
 		table->p_current->stop = boolean;

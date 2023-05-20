@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 18:34:31 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 20:08:43 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ bool    synchronize_launch(t_pairs *self)
 
 	start = self->start;
     while (start / 1000 > get_time_point() / 1000)
-		if (have_to_quit(self))
-			return (false);
+		continue ;
+		// if (have_to_quit(self))
+			// return (false);
 	return (true);
 }
 
@@ -54,14 +55,15 @@ bool	wait_for_a_while(t_pairs *self, t_case reason)
 {
 	t_time	time_point;
 	t_time	duration;
-	bool	print;
+	// bool	print;
 
-	print = true;
+	// print = true;
 	if (reason == EAT || reason == SLEEP)
 	{
 		pthread_mutex_lock(&self->mutex_philo);
 		duration = (t_time []){self->philo->time_to_eat, self->philo->time_to_sleep}[reason];
 		time_point = (t_time []){self->philo->last_meal, get_time_point()}[reason];
+		my_print(self, (char *[]){"is eating", "is sleeping"}[reason]);
 		pthread_mutex_unlock(&self->mutex_philo);
 		while (get_timestamp_in_millisec(time_point) < duration)
 		{
@@ -69,9 +71,8 @@ bool	wait_for_a_while(t_pairs *self, t_case reason)
 			// 	return (set_death(self), false);
 			if (have_to_quit(self))
 				return (false);
-			if (print)
-				my_print(self, (char *[]){"is eating", "is sleeping"}[reason]);
-			print = false;
+			// if (print)
+			// print = false;
 		}
 	}
 	else if (reason == THINK)

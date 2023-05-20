@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 23:58:02 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 17:51:49 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 19:52:40 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_pointer
 	int					len;
 	
 	t_pairs			*lst_of_pairs;
+	t_pairs			*lst_of_pairs_begin;
+	t_pairs			*arg;
 	t_philo			*p_begin;
 	t_philo			*p_current;
 	t_philo			*p_end;
