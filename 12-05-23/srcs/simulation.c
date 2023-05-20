@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 02:07:11 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 02:21:21 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ void    eat(t_philo *self)
 	pthread_mutex_lock(self->left_fork_mutex);
 	time_now = get_time_point();
 	self->last_meal = (t_time []){time_now, self->start}[(time_now < self->start)];
+	self->number_of_meal_eaten += 1;
 	leave_simulation = wait_for_a_while(self, EAT);
 	pthread_mutex_unlock(self->left_fork_mutex);
 	pthread_mutex_unlock(&self->fork_mutex);
 	if (!leave_simulation)
+		return ;
+	if (self->number_of_meal_needed != INFINITE \
+		&& self->number_of_meal_eaten == self->number_of_meal_needed)
 		return ;
 	return (philo_sleep(self));
 }

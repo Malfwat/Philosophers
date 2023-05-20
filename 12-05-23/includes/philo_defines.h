@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_defines.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 23:31:51 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/17 19:11:45 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/20 02:20:18 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef long long t_time;
 # ifndef LAUNCH_LAPS
 #  define LAUNCH_LAPS 150
 # endif /* LAUNCH_LAPS */
+
+# define INFINITE -1
 
 typedef enum e_case
 {
