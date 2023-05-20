@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 02:07:39 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 03:56:44 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ t_time	get_timestamp_in_millisec(t_time start)
 	return ((tmp - start) / 1000);
 }
 
-void    synchronize_launch(t_time departure)
+bool    synchronize_launch(t_philo *self)
 {
-    while (departure / 1000 > get_time_point() / 1000);
+    while (self->start / 1000 > get_time_point() / 1000)
+		if (have_to_quit(self))
+			return (false);
+	return (true);
 }
 
 t_time	get_departure_time(int table_len)
@@ -51,7 +54,6 @@ bool	wait_for_a_while(t_philo *self, t_case reason)
 
 	if (reason == EAT)
 	{
-		// timestamp_from_start = get_timestamp_in_millisec(self->start);
 		print = true;
 		while (get_timestamp_in_millisec(self->last_meal) < self->time_to_eat)
 		{

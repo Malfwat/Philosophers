@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_time.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 01:03:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/16 22:11:23 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/20 03:47:59 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 t_time	get_time_point(void);
 t_time	get_timestamp_in_millisec(t_time start);
-void    synchronize_launch(t_time departure);
+bool    synchronize_launch(t_philo *self);
 t_time	get_departure_time(int table_len);
 bool	wait_for_a_while(t_philo *self, t_case reason);
 

@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 02:33:46 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 03:48:32 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	*routine(void *addr)
 	t_philo *philo;
 
 	philo = (t_philo *)addr;
-	synchronize_launch(philo->start);
+	if (!synchronize_launch(philo))
+		return (NULL);
 	simulation(philo);
 	return (NULL);
 }
@@ -93,7 +94,8 @@ void    prelaunch(t_table *table)
 	{
 		table->p_current->start = departure;
 		table->p_current->last_meal = departure;
-		pthread_create(&table->p_current->thread, NULL, routine, table->p_current);
+		if (pthread_create(&table->p_current->thread, NULL, routine, table->p_current))
+			return (set_death(table->p_current));
 		table->p_current = table->p_current->next;
 	}
 	i = 0;
