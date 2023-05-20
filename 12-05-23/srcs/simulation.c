@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 00:00:38 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 02:07:11 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ void    philo_sleep(t_philo *self)
 void    eat(t_philo *self)
 {
 	bool    leave_simulation;
+	t_time	time_now;
 
 	pthread_mutex_lock(&self->fork_mutex);
 	pthread_mutex_lock(self->left_fork_mutex);
-	self->last_meal = get_time_point();
+	time_now = get_time_point();
+	self->last_meal = (t_time []){time_now, self->start}[(time_now < self->start)];
 	leave_simulation = wait_for_a_while(self, EAT);
 	pthread_mutex_unlock(self->left_fork_mutex);
 	pthread_mutex_unlock(&self->fork_mutex);
@@ -69,7 +71,6 @@ void	*routine(void *addr)
 	t_philo *philo;
 
 	philo = (t_philo *)addr;
-	printf("my_id: %i\n", philo->index);
 	synchronize_launch(philo->start);
 	simulation(philo);
 	return (NULL);
