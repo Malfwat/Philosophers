@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 23:39:53 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 00:21:38 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void	*supervisor(void *addr)
 	{
 		usleep(200);
 		if (is_dead(copy))
-			return (make_unlink_loop(NULL, true), set_death(copy), NULL);
+			return (make_unlink_loop(NULL, true), /* set_death(copy), */ NULL);
 		pthread_mutex_lock(&copy->mutex_philo);
 		if (copy->philo->done_eating)
 		{

@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:44:40 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/20 23:11:44 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 00:21:15 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	set_death(t_pairs *self)
 {
 	t_philo	*philo;
 	
-	pthread_mutex_lock(&self->mutex_philo);
+	// pthread_mutex_lock(&self->mutex_philo);
 	philo = self->philo;
 	pthread_mutex_lock(&philo->stop_mutex);
 	*philo->stop = true;
 	pthread_mutex_unlock(&philo->stop_mutex);
 	my_print(self, "Died");
-	pthread_mutex_unlock(&self->mutex_philo);
+	// pthread_mutex_unlock(&self->mutex_philo);
 }
 
 bool	is_dead(t_pairs *self)
@@ -46,6 +46,7 @@ bool	is_dead(t_pairs *self)
 	}
 	if (get_timestamp_in_millisec(philo->last_meal) > philo->time_to_die)
 	{
+		set_death(self);
 		pthread_mutex_unlock(&self->mutex_philo);
 		return (somebody_is_dead = true, true);
 	}
