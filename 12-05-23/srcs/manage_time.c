@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 15:26:06 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 16:20:22 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,14 @@ t_time	get_timestamp_in_millisec(t_time start)
 	return ((tmp - start) / 1000);
 }
 
-bool    synchronize_launch(t_table *table, t_philo *self)
+bool    synchronize_launch(t_pairs *self)
 {
 	t_time	start;
-	t_pairs	*pair;
+	t_philo	*philo;
 
-	pair = get_pair(table->lst_of_pairs, self);
-	pthread_mutex_lock(&pair->mutex_philo);
-	start = self->start;
-	pthread_mutex_unlock(&pair->mutex_philo);
+	pthread_mutex_lock(&self->mutex_philo);
+	start = philo->start;
+	pthread_mutex_unlock(&self->mutex_philo);
     while (start / 1000 > get_time_point() / 1000)
 		if (have_to_quit(self))
 			return (false);

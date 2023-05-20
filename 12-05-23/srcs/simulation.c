@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 15:49:02 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 16:28:00 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,33 @@ void    eat(t_philo *self)
 	return (philo_sleep(self));
 }
 
-void	simulation(t_philo *self)
+void	simulation(t_pairs *self)
 {
-	if (self->index % 2)
+	t_philo	*philo;
+	
+	pthread_mutex_lock(&self->mutex_philo);
+	philo = self->philo;
+	if (philo->index % 2)
 	{
+		pthread_mutex_unlock(&self->mutex_philo);
 		usleep(10);
 		think(self);
 	}
 	else
+	{
+		pthread_mutex_unlock(&self->mutex_philo);
 		eat(self);
+	}
 }
 
 void	*routine(void *addr)
 {
-	t_philo *philo;
+	t_pairs *self;
 
-	philo = (t_philo *)addr;
-	if (!synchronize_launch(philo))
+	self = (t_pairs *)addr;
+	if (!synchronize_launch(self))
 		return (NULL);
-	simulation(philo);
+	simulation(self);
 	return (NULL);
 }
 
