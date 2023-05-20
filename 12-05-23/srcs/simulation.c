@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 21:18:54 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 23:39:53 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,22 @@ void    eat(t_pairs *self)
 	pthread_mutex_unlock(&philo->fork_mutex);
 	if (!leave_simulation)
 	{
+		printf("je quitte ici\n");
 		return ;
 	}
 	pthread_mutex_lock(&self->mutex_philo);
 	if (philo->number_of_meal_needed != INFINITE \
 		&& philo->number_of_meal_eaten == philo->number_of_meal_needed)
 	{
+		my_print(self, "done_eating");
 		philo->done_eating = true;
 		pthread_mutex_unlock(&self->mutex_philo);
+		printf("je quitdte ici\n");
 		return ;
 	}
 	pthread_mutex_unlock(&self->mutex_philo);
+		printf("je quittse ici\n");
+	
 	return (philo_sleep(self));
 }
 
@@ -137,14 +142,32 @@ void	make_unlink_loop(t_pairs *lst, bool mode)
 
 t_pairs	*copy_listpairs(t_pairs *original)
 {
-	t_pairs	*new;
+	t_table	table;
 
-	new = NULL;
+	table = (t_table){0};
 	while (original)
 	{
-		add_pairs()
+		add_pairs(&table, original->philo);
 		original = original->next;
 	}
+	return (table.lst_of_pairs);
+}
+
+void	pop_pairs(t_pairs **addr)
+{
+	t_pairs	*tmp;
+
+	tmp = *addr;
+	
+	printf("je passe\n");
+	if (tmp == tmp->next)
+		*addr = NULL;
+	else
+	{
+		(*addr)->prev->next = (*addr)->next;
+		(*addr) = (*addr)->next;
+	}
+	free(tmp);
 }
 
 void	*supervisor(void *addr)
@@ -163,20 +186,29 @@ void	*supervisor(void *addr)
 		tmp->print_mutex = table->print_mutex;
 		tmp->start = table->departure;
 		tmp->philo->last_meal = table->departure;
-		table->arg[i] = (t_pairs){tmp->philo, tmp->start, tmp->print_mutex, tmp->mutex_philo, NULL};
+		table->arg[i] = (t_pairs){tmp->philo, tmp->start, tmp->print_mutex, tmp->mutex_philo, NULL, NULL};
 		if (pthread_create(&tmp->philo->thread, NULL, routine, &table->arg[i++]))
 			return (set_death(tmp), NULL);
 		tmp = tmp->next;
 	}
 	copy = copy_listpairs(table->lst_of_pairs);
-	make_unlink_loop(table->lst_of_pairs, false);
-	while (table->lst_of_pairs)
+	make_unlink_loop(copy, false);
+	while (copy)
 	{
 		usleep(200);
-		if (is_dead(table->lst_of_pairs))
-			return (make_unlink_loop(NULL, true), set_death(table->lst_of_pairs), NULL);
-		if 
-		table->lst_of_pairs = table->lst_of_pairs->next;
+		if (is_dead(copy))
+			return (make_unlink_loop(NULL, true), set_death(copy), NULL);
+		pthread_mutex_lock(&copy->mutex_philo);
+		if (copy->philo->done_eating)
+		{
+			pop_pairs(&copy);
+			pthread_mutex_unlock(&copy->mutex_philo);
+		}
+		else
+		{
+			pthread_mutex_unlock(&copy->mutex_philo);
+			copy = copy->next;
+		}
 	}
 	return (NULL);
 }

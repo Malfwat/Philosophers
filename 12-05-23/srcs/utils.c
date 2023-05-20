@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 20:09:55 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 23:43:13 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	my_print(t_pairs *self, char *str)
 	philo = self->philo;
 	pthread_mutex_lock(&self->print_mutex);
 	// printf("Ici souci\n");
-	printf("%-7.03lli %i %s\n", time, philo->index, str);
+	if (philo)
+		printf("%-7.03lli %i %s\n", time, philo->index, str);
 	pthread_mutex_unlock(&self->print_mutex);
 	// pthread_mutex_unlock(&self->mutex_philo);
 }

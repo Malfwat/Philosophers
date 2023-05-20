@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 23:58:02 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 21:20:37 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 23:23:38 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo_mutex_couple
 	pthread_mutex_t				print_mutex;
 	pthread_mutex_t				mutex_philo;
 	struct s_philo_mutex_couple	*next;
+	struct s_philo_mutex_couple	*prev;
 }t_pairs;
 
 

@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:48:55 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 19:54:46 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 23:24:18 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,12 @@ bool	add_pairs(t_table *table, t_philo *philo)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
+		new->prev = tmp;
 	}
 	return (true);
 }
 
-bool	add_philo(t_table *table,char **av, int index)
+bool	add_philo(t_table *table, char **av, int index)
 {
 	t_philo	*new;
 

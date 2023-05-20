@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:20:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 18:23:38 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 23:07:28 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ bool	is_good_params(int ac, char **av);
 bool	have_to_quit(t_pairs *self);
 bool	is_dead(t_pairs *self);
 void	set_death(t_pairs *self);
+
+bool	add_pairs(t_table *table, t_philo *philo);
 
 void	my_print(t_pairs *self, char *str);
 
