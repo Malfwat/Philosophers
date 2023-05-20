@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:44:40 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/20 04:41:36 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 15:53:10 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,20 @@
 #include <philosophers.h>
 #include <stdio.h>
 
-void	set_death(t_philo *self)
+void	set_death(t_pairs *self)
 {
-	pthread_mutex_lock(&self->stop_mutex);
-	*self->stop = true;
-	pthread_mutex_unlock(&self->stop_mutex);
-	my_print(self, "Died");
+	t_philo	*philo;
+	
+	pthread_mutex_lock(&self->mutex_philo);
+	philo = self->philo;
+	pthread_mutex_lock(&philo->stop_mutex);
+	*philo->stop = true;
+	pthread_mutex_unlock(&philo->stop_mutex);
+	my_print(philo, "Died");
+	pthread_mutex_unlock(&self->mutex_philo);
 }
 
-bool	is_dead(t_philo *self)
+bool	is_dead(t_pairs *self)
 {
 	static bool somebody_is_dead;
 	
@@ -36,7 +41,7 @@ bool	is_dead(t_philo *self)
 	return (false);
 }
 
-bool	have_to_quit(t_philo *self)
+bool	have_to_quit(t_pairs *self)
 {
 	bool	return_value;
 

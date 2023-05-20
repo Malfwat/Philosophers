@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 05:07:45 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 15:36:15 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static bool	ft_is_digit(char c)
 
 t_pairs	*get_pair(t_pairs *lst, t_philo *to_find)
 {
-	while (lst != to_find)
+	while (lst->philo != to_find)
 		lst = lst->next;
 	return (lst);
 }

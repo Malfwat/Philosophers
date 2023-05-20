@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 23:58:02 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 04:59:12 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 15:38:19 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_pointer
 	t_philo			*p_begin;
 	t_philo			*p_current;
 	t_philo			*p_end;
+	t_time  		departure;
 	pthread_mutex_t	stop_mutex;
 	pthread_mutex_t	print_mutex;
 }t_table;

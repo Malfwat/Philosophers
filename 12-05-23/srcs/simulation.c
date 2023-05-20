@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 13:59:14 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 15:49:02 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,28 +83,43 @@ void	*routine(void *addr)
 	return (NULL);
 }
 
-void    prelaunch(t_table *table)
+
+void	*supervisor(void *addr)
 {
-	int     i;
+	t_table	*table;
 	t_pairs	*tmp;
-	t_time  departure;
-	
+	int		i;
+
 	i = 0;
-	departure = get_departure_time(table->len);
-	table->p_current = table->p_begin;
+	table = (t_table *)addr;
 	tmp = table->lst_of_pairs;
 	while (tmp)
 	{
-		tmp->philo->start = departure;
-		tmp->philo->last_meal = departure;
-		if (pthread_create(&tmp->philo->thread, NULL, routine, tmp))
-			return (set_death(tmp->philo));
+		tmp->philo->start = table->departure;
+		tmp->philo->last_meal = table->departure;
+		if (pthread_create(&tmp->philo->thread, NULL, routine, \
+			&(t_pairs){tmp->philo, tmp->mutex_philo, NULL}))
+			return (set_death(tmp->philo), NULL);
 		tmp = tmp->next;
 	}
-	i = 0;
-	while (table->p_current != table->p_begin || !i++)
-	{
-		pthread_join(table->p_current->thread, NULL);
-		table->p_current = table->p_current->next;
-	}
+
+	// make_it_loop
+	return (NULL);
+}
+
+void	supervise(t_table *table)
+{
+	pthread_t	supervisor_thread;
+
+	pthread_create(&supervisor_thread, NULL, supervisor, table);
+	pthread_join(supervisor_thread, NULL);
+}
+
+void    prelaunch(t_table *table)
+{
+	
+	table->departure = get_departure_time(table->len);
+	table->p_current = table->p_begin;
+	
+	supervise(table);
 }

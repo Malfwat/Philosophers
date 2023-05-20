@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 22:25:26 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 05:09:42 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/20 15:26:06 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,52 +53,6 @@ t_time	get_departure_time(int table_len)
 {
 	return (get_time_point() + (LAUNCH_LAPS * (t_time)table_len));
 }
-/* 
-bool	wait_for_a_while(t_philo *self, t_case reason)
-{
-	t_time	time_point_sleep;
-	bool	print;
-
-	print = true;
-	if (reason == EAT)
-	{
-		while (get_timestamp_in_millisec(self->last_meal) < self->time_to_eat)
-		{
-			if (is_dead(self))
-				return (set_death(self), false);
-			if (have_to_quit(self))
-				return (false);
-			if (print)
-				my_print(self, "is eating");
-			print = false;
-		}
-	}
-	else if (reason == SLEEP)
-	{
-		time_point_sleep = get_time_point();
-		// my_print(self, );
-		while (get_timestamp_in_millisec(time_point_sleep) < self->time_to_sleep)
-		{
-			if (is_dead(self))
-				return (set_death(self), false);
-			if (have_to_quit(self))
-				return (false);
-			if (print)
-				my_print(self, "Start sleeping");
-			print = false;
-		}
-	}
-	else if (reason == THINK)
-	{
-		my_print(self, "Start thinking");
-		if (is_dead(self))
-			return (set_death(self), false);
-		if (have_to_quit(self))
-			return (false);
-	}
-	return (true);
-} */
-
 
 bool	wait_for_a_while(t_philo *self, t_case reason)
 {
