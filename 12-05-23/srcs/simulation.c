@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 18:39:15 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:05:34 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ void    eat(t_pairs *self)
 
 	pthread_mutex_lock(&self->mutex_philo);
 	philo = self->philo;
-	// if (philo->index % 2)
-	// {
+	if (philo->index % 2)
+	{
 		pthread_mutex_lock(&philo->fork_mutex);
 		my_print(self, "Has taken a fork");
 		pthread_mutex_lock(philo->left_fork_mutex);
-	// }
-	// else 
-	// {
-		// pthread_mutex_lock(philo->left_fork_mutex);
-		// my_print(self, "Has taken a fork");
-		// pthread_mutex_lock(&philo->fork_mutex);
-	// }
+	}
+	else 
+	{
+		pthread_mutex_lock(philo->left_fork_mutex);
+		my_print(self, "Has taken a fork");
+		pthread_mutex_lock(&philo->fork_mutex);
+	}
 	time_now = get_time_point();
 	philo->last_meal = (t_time []){time_now, self->start}[(time_now < self->start)];
 	philo->number_of_meal_eaten += 1;
