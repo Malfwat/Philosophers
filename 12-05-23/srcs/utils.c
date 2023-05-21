@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 18:46:12 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:41:51 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@
 #include <philo_time.h>
 #include <philo_struct.h>
 
-void	my_print(t_pairs *self, char *str)
+void	my_print(t_pairs *self, char *str, t_case reason)
 {
 	t_time	time;
 	t_philo	*philo;
 
-	philo = self->philo;
-	pthread_mutex_lock(&philo->stop_mutex);
-	if (*philo->stop == true)
-		return ((void)pthread_mutex_unlock(&philo->stop_mutex));
-	pthread_mutex_unlock(&philo->stop_mutex);
 	time = get_timestamp_in_millisec(self->start);
+	philo = self->philo;
 	pthread_mutex_lock(&self->print_mutex);
+	pthread_mutex_lock(&philo->stop_mutex);
+	if (*philo->stop == true && reason != DIE)
+	{
+		pthread_mutex_unlock(&self->print_mutex);
+		pthread_mutex_unlock(&philo->stop_mutex);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->stop_mutex);
 	printf("%-7.03lli %i %s\n", time, philo->index, str);
 	pthread_mutex_unlock(&self->print_mutex);
 }

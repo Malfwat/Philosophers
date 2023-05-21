@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 23:31:51 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 18:23:37 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:41:29 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef enum e_case
 {
     EAT,
     SLEEP,
-    THINK
+    THINK,
+    DIE
 }   t_case;
 
 #endif /* PHILO_DEFINES_H */

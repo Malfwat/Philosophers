@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:20:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 00:45:01 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:42:46 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void	set_death(t_pairs *self);
 bool	add_pairs(t_table *table, t_philo *philo);
 void	free_pairs(t_pairs *pairs);
 
-void	my_print(t_pairs *self, char *str);
+void	my_print(t_pairs *self, char *str, t_case reason);
 
 #endif /*PHILOSOPHERS_H*/

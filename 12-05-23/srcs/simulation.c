@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 22:05:34 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 23:09:16 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void    philo_sleep(t_pairs *self)
 {
 	bool    leave_simulation;
 
-	my_print(self, "left eating");
 	leave_simulation = wait_for_a_while(self, SLEEP);
 	if (!leave_simulation)
 		return ;
@@ -48,18 +47,38 @@ void    eat(t_pairs *self)
 	t_time	time_now;
 	t_philo	*philo;
 
+
+
+	// if (!leave_simulation)
+		// return ;
 	pthread_mutex_lock(&self->mutex_philo);
 	philo = self->philo;
+	if (philo->number_of_meal_needed != INFINITE \
+		&& philo->number_of_meal_eaten == philo->number_of_meal_needed)
+	{
+		philo->done_eating = true;
+		pthread_mutex_unlock(&self->mutex_philo);
+		return ;
+	}
+	pthread_mutex_unlock(&self->mutex_philo);
+
+
+
+	pthread_mutex_lock(&self->mutex_philo);
 	if (philo->index % 2)
 	{
 		pthread_mutex_lock(&philo->fork_mutex);
-		my_print(self, "Has taken a fork");
+		my_print(self, "Has taken a fork", EAT);
+		if (!philo->left_fork_mutex)
+			return ;
 		pthread_mutex_lock(philo->left_fork_mutex);
 	}
 	else 
 	{
+		if (!philo->left_fork_mutex)
+			return (my_print(self, "Has taken a fork", EAT));
 		pthread_mutex_lock(philo->left_fork_mutex);
-		my_print(self, "Has taken a fork");
+		my_print(self, "Has taken a fork", EAT);
 		pthread_mutex_lock(&philo->fork_mutex);
 	}
 	time_now = get_time_point();
