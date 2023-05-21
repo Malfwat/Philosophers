@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 00:04:40 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 18:21:11 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,10 @@ void	my_print(t_pairs *self, char *str)
 	t_philo	*philo;
 
 	time = get_timestamp_in_millisec(self->start);
-	// printf("Je passe ici\n");
-	// pthread_mutex_lock(&self->mutex_philo);
 	philo = self->philo;
 	pthread_mutex_lock(&self->print_mutex);
-	// printf("Ici souci\n");
 	printf("%-7.03lli %i %s\n", time, philo->index, str);
 	pthread_mutex_unlock(&self->print_mutex);
-	// pthread_mutex_unlock(&self->mutex_philo);
 }
 
 static bool	ft_is_digit(char c)

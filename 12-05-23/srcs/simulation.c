@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 12:53:16 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 18:24:53 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,16 @@ void    eat(t_pairs *self)
 	pthread_mutex_unlock(philo->left_fork_mutex);
 	pthread_mutex_unlock(&philo->fork_mutex);
 	if (!leave_simulation)
-	{
-		printf("je quitte ici\n");
 		return ;
-	}
 	pthread_mutex_lock(&self->mutex_philo);
 	if (philo->number_of_meal_needed != INFINITE \
 		&& philo->number_of_meal_eaten == philo->number_of_meal_needed)
 	{
-		my_print(self, "done_eating");
 		philo->done_eating = true;
 		pthread_mutex_unlock(&self->mutex_philo);
-		printf("je quitdte ici\n");
 		return ;
 	}
 	pthread_mutex_unlock(&self->mutex_philo);
-		printf("je quittse ici\n");
-	
 	return (philo_sleep(self));
 }
 
@@ -121,24 +114,24 @@ void	*routine(void *addr)
 	return (NULL);
 }
 
-void	make_unlink_loop(t_pairs *lst, bool mode)
+void	make_unlink_loop(t_pairs_cursor *lst, bool mode)
 {
-	t_pairs *begin;
-	static t_pairs *end;
+	t_pairs	*tmp;
 
 	if (!mode)
 	{
-		begin = lst;
-		while (lst->next)
-			lst = lst->next;
-		end = lst;
-		lst->next = begin;
-		begin->prev = end;
+		lst->current = lst->begin;
+		tmp = lst->begin;
+		while (tmp->next)
+			tmp = tmp->next;
+		lst->end = tmp;
+		lst->end->next = lst->begin;
+		lst->begin->prev = lst->end;
 	}
 	else
 	{
-		if (end)
-			end->next = NULL;
+		if (lst->end)
+			lst->end->next = NULL;
 	}
 }
 
@@ -158,20 +151,27 @@ t_pairs	*copy_listpairs(t_pairs *original)
 	return (table.lst_of_pairs);
 }
 
-void	pop_pairs(t_pairs **addr)
+void	pop_pairs(t_pairs_cursor *addr)
 {
 	t_pairs	*tmp;
 
-	tmp = *addr;
+	tmp = addr->current;
 	
-	// printf("je passe\n");
-	if ((*addr) == (*addr)->next)
-		*addr = NULL;
+	if (addr->current == addr->current->next)
+	{
+		addr->begin = NULL;
+		addr->current = NULL;
+		addr->end = NULL;
+	}
 	else
 	{
-		(*addr)->prev->next = (*addr)->next;
-		(*addr)->next->prev = (*addr)->prev;
-		(*addr) = (*addr)->next;
+		if (addr->current == addr->begin)
+			addr->begin = addr->begin->next;
+		else if (addr->current == addr->end)
+			addr->end = addr->end->prev;
+		addr->current->prev->next = addr->current->next;
+		addr->current->next->prev = addr->current->prev;
+		addr->current = addr->current->next;
 	}
 	free(tmp);
 }
@@ -183,7 +183,6 @@ void	join_all(t_pairs *lst)
 		pthread_mutex_lock(&lst->mutex_philo);
 		pthread_join(lst->philo->thread, NULL);
 		pthread_mutex_unlock(&lst->mutex_philo);
-		printf("je passe");
 		lst = lst->next;
 	}
 }
@@ -193,7 +192,7 @@ void	*supervisor(void *addr)
 	int		i;
 	t_table	*table;
 	t_pairs	*tmp;
-	t_pairs	*copy;
+	t_pairs_cursor	copy;
 	pthread_mutex_t	tmp_mutex;
 
 	table = (t_table *)addr;
@@ -208,31 +207,33 @@ void	*supervisor(void *addr)
 		table->arg[i] = (t_pairs){tmp->philo, tmp->start, tmp->print_mutex, tmp->mutex_philo, NULL, NULL};
 		if (pthread_create(&tmp->philo->thread, NULL, routine, &table->arg[i++]))
 			return (set_death(tmp), NULL);
-		// pthread_detach(tmp->philo->thread);
-		// if (pthread_detach(tmp->philo->thread) == ESRCH)
-			// return (set_death(tmp), NULL);
 		tmp = tmp->next;
 	}
-	copy = copy_listpairs(table->lst_of_pairs);
-	if (!copy)
+	copy.begin = copy_listpairs(table->lst_of_pairs);
+	if (!copy.begin)
 		return (write(2, "error malloc\n", 13), NULL);
-	make_unlink_loop(copy, false);
-	while (copy)
+	make_unlink_loop(&copy, false);
+	while (copy.current)
 	{
 		usleep(200);
-		if (is_dead(copy))
-			return (make_unlink_loop(NULL, true), set_death(copy), free_pairs(copy), NULL);
-		pthread_mutex_lock(&copy->mutex_philo);
-		if (copy->philo->done_eating)
+		if (is_dead(copy.current))
 		{
-			tmp_mutex = copy->mutex_philo;
+			make_unlink_loop(&copy, true);
+			set_death(copy.current);
+			free_pairs(copy.begin);
+			break ;
+		}
+		pthread_mutex_lock(&copy.current->mutex_philo);
+		if (copy.current->philo->done_eating)
+		{
+			tmp_mutex = copy.current->mutex_philo;
 			pop_pairs(&copy);
 			pthread_mutex_unlock(&tmp_mutex);
 		}
 		else
 		{
-			pthread_mutex_unlock(&copy->mutex_philo);
-			copy = copy->next;
+			pthread_mutex_unlock(&copy.current->mutex_philo);
+			copy.current = copy.current->next;
 		}
 	}
 	join_all(table->lst_of_pairs);
