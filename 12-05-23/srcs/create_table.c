@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 23:48:55 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/20 23:24:18 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 11:51:40 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,20 @@
 #include <string.h>
 #include <stdlib.h>
 
-void    free_table(t_table *table)
+void	free_pairs(t_pairs *pairs)
 {
 	t_pairs	*tmp;
+	
+	while (pairs)
+	{
+		tmp = pairs;
+		pairs = pairs->next;
+		free(tmp);
+	}
+}
 
+void    free_table(t_table *table)
+{
 	if (!table)
 		return ;
 	table->p_end->next = NULL;
@@ -31,12 +41,7 @@ void    free_table(t_table *table)
 		pthread_mutex_destroy(&table->p_current->self_mutex);
 		free(table->p_current);
 	}
-	while (table->lst_of_pairs_begin)
-	{
-		tmp = table->lst_of_pairs_begin;
-		table->lst_of_pairs_begin = table->lst_of_pairs_begin->next;
-		free(tmp);
-	}
+	free_pairs(table->lst_of_pairs_begin);
 	free(table->arg);
 	pthread_mutex_destroy(&table->print_mutex);
 	pthread_mutex_destroy(&table->stop_mutex);
@@ -68,9 +73,9 @@ t_pairs	*new_pairs(t_philo *philo)
 	new = malloc(sizeof(t_pairs));
 	if (!new)
 		return (new);
+	memset(new, 0, sizeof(t_pairs));
 	new->mutex_philo = philo->self_mutex;
 	new->philo = philo;
-	new->next = NULL;
 	return (new);
 }
 

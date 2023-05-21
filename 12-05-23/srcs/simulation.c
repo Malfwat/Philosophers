@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 00:25:07 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 12:53:16 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <philo_defines.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 
 void    eat(t_pairs *self);
 
@@ -132,6 +133,7 @@ void	make_unlink_loop(t_pairs *lst, bool mode)
 			lst = lst->next;
 		end = lst;
 		lst->next = begin;
+		begin->prev = end;
 	}
 	else
 	{
@@ -147,7 +149,10 @@ t_pairs	*copy_listpairs(t_pairs *original)
 	table = (t_table){0};
 	while (original)
 	{
-		add_pairs(&table, original->philo);
+		pthread_mutex_lock(&original->mutex_philo);
+		if (!add_pairs(&table, original->philo))
+			return (free_pairs(table.lst_of_pairs), NULL);
+		pthread_mutex_unlock(&original->mutex_philo);
 		original = original->next;
 	}
 	return (table.lst_of_pairs);
@@ -159,15 +164,28 @@ void	pop_pairs(t_pairs **addr)
 
 	tmp = *addr;
 	
-	printf("je passe\n");
-	if (tmp == tmp->next)
+	// printf("je passe\n");
+	if ((*addr) == (*addr)->next)
 		*addr = NULL;
 	else
 	{
 		(*addr)->prev->next = (*addr)->next;
+		(*addr)->next->prev = (*addr)->prev;
 		(*addr) = (*addr)->next;
 	}
 	free(tmp);
+}
+
+void	join_all(t_pairs *lst)
+{
+	while (lst)
+	{
+		pthread_mutex_lock(&lst->mutex_philo);
+		pthread_join(lst->philo->thread, NULL);
+		pthread_mutex_unlock(&lst->mutex_philo);
+		printf("je passe");
+		lst = lst->next;
+	}
 }
 
 void	*supervisor(void *addr)
@@ -176,6 +194,7 @@ void	*supervisor(void *addr)
 	t_table	*table;
 	t_pairs	*tmp;
 	t_pairs	*copy;
+	pthread_mutex_t	tmp_mutex;
 
 	table = (t_table *)addr;
 	tmp = table->lst_of_pairs;
@@ -189,20 +208,26 @@ void	*supervisor(void *addr)
 		table->arg[i] = (t_pairs){tmp->philo, tmp->start, tmp->print_mutex, tmp->mutex_philo, NULL, NULL};
 		if (pthread_create(&tmp->philo->thread, NULL, routine, &table->arg[i++]))
 			return (set_death(tmp), NULL);
+		// pthread_detach(tmp->philo->thread);
+		// if (pthread_detach(tmp->philo->thread) == ESRCH)
+			// return (set_death(tmp), NULL);
 		tmp = tmp->next;
 	}
 	copy = copy_listpairs(table->lst_of_pairs);
+	if (!copy)
+		return (write(2, "error malloc\n", 13), NULL);
 	make_unlink_loop(copy, false);
 	while (copy)
 	{
 		usleep(200);
 		if (is_dead(copy))
-			return (make_unlink_loop(NULL, true), set_death(copy), NULL);
+			return (make_unlink_loop(NULL, true), set_death(copy), free_pairs(copy), NULL);
 		pthread_mutex_lock(&copy->mutex_philo);
 		if (copy->philo->done_eating)
 		{
+			tmp_mutex = copy->mutex_philo;
 			pop_pairs(&copy);
-			pthread_mutex_unlock(&copy->mutex_philo);
+			pthread_mutex_unlock(&tmp_mutex);
 		}
 		else
 		{
@@ -210,6 +235,7 @@ void	*supervisor(void *addr)
 			copy = copy->next;
 		}
 	}
+	join_all(table->lst_of_pairs);
 	return (NULL);
 }
 
