@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:43:23 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 18:21:11 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 18:46:12 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ void	my_print(t_pairs *self, char *str)
 	t_time	time;
 	t_philo	*philo;
 
-	time = get_timestamp_in_millisec(self->start);
 	philo = self->philo;
+	pthread_mutex_lock(&philo->stop_mutex);
+	if (*philo->stop == true)
+		return ((void)pthread_mutex_unlock(&philo->stop_mutex));
+	pthread_mutex_unlock(&philo->stop_mutex);
+	time = get_timestamp_in_millisec(self->start);
 	pthread_mutex_lock(&self->print_mutex);
 	printf("%-7.03lli %i %s\n", time, philo->index, str);
 	pthread_mutex_unlock(&self->print_mutex);

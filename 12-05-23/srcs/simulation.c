@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 18:24:53 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 18:39:15 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,17 @@ void	make_unlink_loop(t_pairs_cursor *lst, bool mode)
 	}
 }
 
+t_pairs	*last_pairs(t_pairs *lst)
+{
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
 t_pairs	*copy_listpairs(t_pairs *original)
 {
 	t_table	table;
+	t_pairs	*tmp;
 
 	table = (t_table){0};
 	while (original)
@@ -146,6 +154,8 @@ t_pairs	*copy_listpairs(t_pairs *original)
 		if (!add_pairs(&table, original->philo))
 			return (free_pairs(table.lst_of_pairs), NULL);
 		pthread_mutex_unlock(&original->mutex_philo);
+		tmp = last_pairs(table.lst_of_pairs);
+		tmp->start = original->start;
 		original = original->next;
 	}
 	return (table.lst_of_pairs);
