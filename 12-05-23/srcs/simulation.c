@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:47:09 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/21 23:09:16 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/21 23:19:15 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,21 @@ void    eat(t_pairs *self)
 
 	// if (!leave_simulation)
 		// return ;
+	// pthread_mutex_lock(&self->mutex_philo);
+	// philo = self->philo;
+	// if (philo->number_of_meal_needed != INFINITE 
+	// 	&& philo->number_of_meal_eaten == philo->number_of_meal_needed)
+	// {
+	// 	philo->done_eating = true;
+	// 	pthread_mutex_unlock(&self->mutex_philo);
+	// 	return ;
+	// }
+	// pthread_mutex_unlock(&self->mutex_philo);
+
+
+
 	pthread_mutex_lock(&self->mutex_philo);
 	philo = self->philo;
-	if (philo->number_of_meal_needed != INFINITE \
-		&& philo->number_of_meal_eaten == philo->number_of_meal_needed)
-	{
-		philo->done_eating = true;
-		pthread_mutex_unlock(&self->mutex_philo);
-		return ;
-	}
-	pthread_mutex_unlock(&self->mutex_philo);
-
-
-
-	pthread_mutex_lock(&self->mutex_philo);
 	if (philo->index % 2)
 	{
 		pthread_mutex_lock(&philo->fork_mutex);
