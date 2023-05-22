@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/22 18:22:27 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:27:32 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ bool	fill_philo_tab(t_philo *tab, int size)
 		else
 			tab[i].mutex_index[LEFT_FORK] = i - 1;
 		tab[i].mutex_index[MY_FORK] = i;
-		if (pthread_mutex_init(&tab[i].mutex_eating))
+		tab[i].index = i + 1;
+		if (pthread_mutex_init(&tab[i].mutex_eating, NULL))
 			return (false);
 	}
 	return (true);
