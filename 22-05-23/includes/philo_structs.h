@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:43:18 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/22 18:27:58 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:10:48 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct	s_table
 	bool			stop;
 	t_time			start;
 	t_params		params;
-	pthread_t		thread;
 	pthread_mutex_t	*mutex_cutlery;
 	pthread_mutex_t	*mutex_stop;
 	pthread_mutex_t	*mutex_print;
@@ -44,6 +43,7 @@ typedef struct	s_philosopher
 	int				mutex_index[2];
 	t_time			last_meal;
 	t_table			*table;
+	pthread_t		thread;
 	pthread_mutex_t	mutex_eating;
 	pthread_mutex_t	*mutex_print;
 }t_philo;

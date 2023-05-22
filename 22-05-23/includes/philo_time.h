@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_time.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 01:03:44 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/22 15:16:45 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:21:38 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PHILO_TIME_H
 
 # include <philo_defines.h>
-# include <philo_struct.h>
+# include <philo_structs.h>
 # include <stdbool.h>
 
 t_time	get_time_point(void);
