@@ -6,13 +6,14 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:29 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/22 16:55:58 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:59:45 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo_struct.h>
+#include <philo_structs.h>
 #include <philo_defines.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 int	ft_atoi(const char *nptr)
 {
@@ -53,7 +54,7 @@ bool	is_positiv_int(char	*number)
 	if (!number)
 		return (false);
 	i = 0;
-	while (number[i] <= '9' && number >= '0')
+	while (number[i] <= '9' && number[i] >= '0')
 		i++;
 	if (number[i] || i > INT_MAX_LEN)
 		return (false);
@@ -64,12 +65,12 @@ bool	check_params(char **av)
 {
 	int	i;
 	
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
-		if (!is_positiv_int(av[i]))
+		if (!is_positiv_int(av[i++]))
 		{
-			printf("Only positiv INT");
+			printf("Only positiv INT\n");
 			return (print_usage(), false);
 		}
 	}
@@ -96,6 +97,6 @@ bool	init_params(t_params *params, int ac, char **av)
 		printf("The time laps must be equal or greater than 60");
 		return (print_usage(), false);
 	}
-	new->number_of_meal_needed = (int []){ft_atoi(av[5]) , INFINITE}[(av[5] == NULL)];
+	params->nb_of_meal_needed = (int []){ft_atoi(av[5]) , INFINITE}[(av[5] == NULL)];
 	return (true);
 }

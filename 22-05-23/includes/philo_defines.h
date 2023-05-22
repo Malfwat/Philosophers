@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:55:45 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/22 15:54:57 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:52:35 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,12 @@ typedef long long t_time;
 # define NB_MAX_PHILO 300
 # define TIME_MIN 60
 # define INFINITE -1
+# define LAUNCH_LAPS 150
+
+enum e_fork
+{
+	LEFT_FORK,
+	MY_FORK
+};
 
 #endif /* PHILO_DEFINES_H */
