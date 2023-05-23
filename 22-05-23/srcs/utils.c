@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:18:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/23 16:55:41 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/23 23:13:50 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return ((void *)tmp);
 }
 
-void	my_print(t_philo *philo, char *str)
+void	my_print(t_philo *philo, char *str, t_time time)
 {
-	t_time	time;
-
-	time = get_timestamp_in_millisec(philo->table->start);
 	pthread_mutex_lock(philo->table->mutex_print);
 	if (!philo->table->stop)
 		printf("%-7.03lli %i %s\n", time, philo->index, str);
