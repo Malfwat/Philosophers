@@ -6,12 +6,17 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:18:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/22 17:00:11 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:55:41 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <limits.h>
+#include <pthread.h>
+#include <philo_time.h>
+#include <stdio.h>
+#include <philo_structs.h>
+#include <philo_defines.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -38,4 +43,15 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	while (i < value_asked)
 		tmp[i++] = 0;
 	return ((void *)tmp);
+}
+
+void	my_print(t_philo *philo, char *str)
+{
+	t_time	time;
+
+	time = get_timestamp_in_millisec(philo->table->start);
+	pthread_mutex_lock(philo->table->mutex_print);
+	if (!philo->table->stop)
+		printf("%-7.03lli %i %s\n", time, philo->index, str);
+	pthread_mutex_unlock(philo->table->mutex_print);
 }

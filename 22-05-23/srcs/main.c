@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:22:37 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/22 20:54:38 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/23 15:35:03 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ int	main(int ac, char **av)
 		return (2);
 	simulation(supervisor);
 	free_supervisor(supervisor);
-	printf("done\n");
 }
