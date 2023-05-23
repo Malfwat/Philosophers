@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/23 00:36:28 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/23 12:05:55 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <philo_defines.h>
 #include <philo_structs.h>
 #include <stdio.h>
+#include <unistd.h>
 
 // void	*thread_print(void *addr)
 // {
@@ -26,6 +27,8 @@
 // 	return (NULL);
 // }
 
+void	think(t_philo *philo);
+
 void	my_print(t_philo *philo, char *str)
 {
 	t_time	time;
@@ -36,17 +39,60 @@ void	my_print(t_philo *philo, char *str)
 	pthread_mutex_unlock(philo->table->mutex_print);
 }
 
+void	philo_sleep(t_philo *philo)
+{
+	t_time	time_point;
+
+	time_point = get_time_point();
+	while (get_timestamp_in_millisec(time_point) < philo->table->params.sleeping)
+	{
+		if (philo->table->stop)
+			return ;
+		// usleep(500);
+	}
+	think(philo);
+}
+
 void	eat(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->mutex_eating);
+	philo->last_meal = get_time_point();
+	pthread_mutex_unlock(&philo->mutex_eating);
+	if (philo->table->stop)
+		return ;
 	if (philo->index % 2)
 	{
-		pthread_mutex_lock(philo->table->mutex_cutlery[philo->mutex_index])
+		pthread_mutex_lock(&philo->table->mutex_cutlery[philo->mutex_index[MY_FORK]]);
+		my_print(philo, "Has taken a fork\n");
+		pthread_mutex_lock(&philo->table->mutex_cutlery[philo->mutex_index[LEFT_FORK]]);
+		my_print(philo, "is eating\n");
 	}
 	else
 	{
-		
+		pthread_mutex_lock(&philo->table->mutex_cutlery[philo->mutex_index[LEFT_FORK]]);
+		my_print(philo, "Has taken a fork\n");
+		pthread_mutex_lock(&philo->table->mutex_cutlery[philo->mutex_index[MY_FORK]]);
+		my_print(philo, "is eating\n");	
 	}
-	my_print(philo, "Has taken a fork\n");
+	while (get_timestamp_in_millisec(philo->last_meal) < philo->table->params.eating)
+	{
+		// usleep(500);
+		if (philo->table->stop)
+		{
+			pthread_mutex_unlock(&philo->table->mutex_cutlery[philo->mutex_index[LEFT_FORK]]);
+			pthread_mutex_unlock(&philo->table->mutex_cutlery[philo->mutex_index[MY_FORK]]);		
+			return ;
+		}
+	}
+	pthread_mutex_unlock(&philo->table->mutex_cutlery[philo->mutex_index[LEFT_FORK]]);
+	pthread_mutex_unlock(&philo->table->mutex_cutlery[philo->mutex_index[MY_FORK]]);
+	my_print(philo, "Dropped\n");
+	pthread_mutex_lock(&philo->mutex_eating);
+	philo->nb_meal_eaten += 1;
+	pthread_mutex_unlock(&philo->mutex_eating);
+	if (philo->table->stop)
+		return ;
+	return (philo_sleep(philo));
 }
 
 void	think(t_philo *philo)
