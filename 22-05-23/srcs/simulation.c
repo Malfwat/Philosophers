@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/24 13:27:27 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:40:11 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*routine(void	*ptr)
 	philo = (t_philo *)ptr;
 	synchronize_launch(philo->table->start);
 	time = get_timestamp_in_millisec(philo->table->start);
-	return (NULL);
+	// return (NULL);
 	if (philo->index % 2)
 		think(philo);
 	else
@@ -98,7 +98,7 @@ void	simulation(t_supervisor *supervisor)
 	while (++i < supervisor->table->params.nb_of_philo)
 		pthread_create(&supervisor->philo_tab[i].thread, NULL, routine, &supervisor->philo_tab[i]);
 	i = -1;
-	check_end(supervisor);
+	// check_end(supervisor);
 	while (++i < supervisor->table->params.nb_of_philo)
 		pthread_join(supervisor->philo_tab[i].thread, NULL);
 }
