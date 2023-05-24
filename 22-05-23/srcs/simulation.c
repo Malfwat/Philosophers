@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/24 17:30:27 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:25:35 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	*routine(void	*ptr)
 	int			i;
 
 	philo = (t_philo *)ptr;
-	get_action_tab(&action);
+	get_action_tab(action);
 	synchronize_launch(philo->table->start);
 	time = get_timestamp_in_millisec(philo->table->start);
-	return (NULL);
+	// return (NULL);
 	if (philo->index % 2)
 		think(philo);
 	i = 0;

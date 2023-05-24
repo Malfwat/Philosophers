@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:43:18 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/24 17:23:29 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:53:44 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct	s_philosopher
 	t_time			last_meal;
 	t_table			*table;
 	pthread_t		thread;
-	pthread_mutex_t	mutex_eating;
-	pthread_mutex_t	*mutex_print;
+	// pthread_mutex_t	mutex_eating;
+	// pthread_mutex_t	*mutex_print;
 }t_philo;
 
 typedef struct	s_supervisor
@@ -54,7 +54,7 @@ typedef struct	s_supervisor
 	t_philo	*philo_tab;
 }t_supervisor;
 
-typedef void (*t_action)(t_philo *);
+typedef bool (*t_action)(t_philo *);
 
 
 #endif /* PHILO_STRUCTS_H */
