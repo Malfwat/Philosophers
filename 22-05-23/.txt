@@ -1,0 +1,5 @@
+tableau action contenant addresse de chaque fonction/etape de la simulation 
+
+nessecite 
+	t_stop determinant l'arret; nb de personne ayant suffisament mange ou -1 DEATH si mort mutex qui va avec
+	mutex pour print correctement

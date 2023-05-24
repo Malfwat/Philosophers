@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:55:45 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/24 13:30:50 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:22:45 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef int	t_stop;
 
 enum e_fork
 {
-	LEFT_FORK,
-	MY_FORK
+	MY_FORK,
+	RIGHT_FORK
 };
 
 #endif /* PHILO_DEFINES_H */

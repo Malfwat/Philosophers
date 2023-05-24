@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:43:18 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/24 13:30:36 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:23:29 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ typedef struct	s_supervisor
 	t_table	*table;
 	t_philo	*philo_tab;
 }t_supervisor;
+
+typedef void (*t_action)(t_philo *);
+
 
 #endif /* PHILO_STRUCTS_H */

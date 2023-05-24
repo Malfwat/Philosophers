@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:23:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/24 13:03:46 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:25:39 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	my_print(t_philo *philo, char *str);
 void	philo_sleep(t_philo *philo);
 void	eat(t_philo *philo);
 void	think(t_philo *philo);
+void	get_action_tab(t_action *tab);
 
 #endif /* PHILOSOPHERS_H */
