@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:13:43 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/23 16:50:24 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:29:55 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_time	get_departure_time(int table_len)
 
 bool	synchronize_launch(t_time time)
 {
-	while (time > get_time_point())
-		continue ;
+	while (time > get_time_point());
 	return (true);
 }

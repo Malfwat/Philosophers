@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:43:18 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/22 20:10:48 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/24 13:30:36 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_params
 
 typedef struct	s_table
 {
-	bool			stop;
+	t_stop			stop;
 	t_time			start;
 	t_params		params;
 	pthread_mutex_t	*mutex_cutlery;
