@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:43:18 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/24 17:53:44 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:22:54 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_philosopher
 	t_time			last_meal;
 	t_table			*table;
 	pthread_t		thread;
+	pthread_t		death_thread;
 	// pthread_mutex_t	mutex_eating;
 	// pthread_mutex_t	*mutex_print;
 }t_philo;

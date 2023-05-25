@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:23:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/24 18:25:17 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:22:15 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ bool	is_death(t_table *table);
 bool	is_dead(t_philo *philo);
 bool	are_fed_up(t_table *table);
 void	add_meal(t_philo *philo);
+
+
+void	ft_putstr(char *str);
+
+bool	waiting(t_philo *philo, t_time time_point, t_time to_wait);
+
+void	*death_routine(void *addr);
 
 
 #endif /* PHILOSOPHERS_H */

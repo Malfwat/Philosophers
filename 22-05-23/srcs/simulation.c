@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/24 18:25:35 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:23:50 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ void	*routine(void	*ptr)
 	get_action_tab(action);
 	synchronize_launch(philo->table->start);
 	time = get_timestamp_in_millisec(philo->table->start);
+	pthread_create(&philo->death_thread, NULL, death_routine, philo);
 	// return (NULL);
-	if (philo->index % 2)
+	if (philo->index % 2 == 0)
+	{
 		think(philo);
+		waiting(philo, philo->table->start, 10);
+	}
 	i = 0;
 	while (!is_death(philo->table) && !are_fed_up(philo->table))
 	{
@@ -40,7 +44,7 @@ void	*routine(void	*ptr)
 			return (NULL);
 		i++;
 	}
-	return (NULL);
+		return (NULL);
 }
 
 void	simulation(t_supervisor *supervisor)
