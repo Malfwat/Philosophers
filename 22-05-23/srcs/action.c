@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/25 19:24:52 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/25 21:12:48 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	eat(t_philo *philo)
 	bool		exit_value;
 	enum e_fork	tab[2];
 
-	if (philo->index % 2)
+	if (philo->index % 2 == 1)
 	{
 		tab[FIRST] = philo->mutex_index[RIGHT_FORK];
 		tab[SEC] = philo->mutex_index[MY_FORK];
@@ -92,17 +92,26 @@ bool	philo_sleep(t_philo *philo)
 
 bool	think(t_philo *philo)
 {
-	// t_time	time_point;
+	t_time	t_eat;
+	t_time	t_cycle;
+	t_time	t_die;
+	t_time	t_sleep;
+	t_time	time_point;
 
-	// time_point = get_time_point();
+	time_point = get_time_point();
 	my_print(philo, "is thinking");
 	if (is_death(philo->table))
 		return (false);
 	usleep(500);
 	return (true);
-	// if (philo->table->params.nb_of_philo % 2 == 1)
-		// return (waiting(philo, time_point, philo->table->params.eating));
-	// return (waiting(philo, time_point, 1));
+	t_eat = philo->table->params.eating;
+	t_die = philo->table->params.dying;
+	t_sleep = philo->table->params.sleeping;
+	t_cycle = get_cycle_time(t_eat, t_die, t_sleep);
+	if (philo->table->params.nb_of_philo % 2 == 0 || t_die >= t_cycle)
+		return (waiting(philo, time_point, t_eat - t_sleep));
+	else 
+		return (waiting(philo, time_point, 1));
 }
 
 void	get_action_tab(t_action *tab)

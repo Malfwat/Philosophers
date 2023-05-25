@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/25 19:25:23 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/25 21:01:42 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	*routine(void	*ptr)
 	pthread_create(&philo->death_thread, NULL, death_routine, philo);
 	if (philo->index % 2 == 0)
 	{
-		think(philo);
+		my_print(philo, "is thinking");
+			// think(philo);
 		// usleep();
-		// waiting(philo, philo->table->start, 1);
+		waiting(philo, philo->table->start, philo->table->params.eating);
 	}
 	i = 0;
 	while (!is_death(philo->table) && !are_fed_up(philo->table))
