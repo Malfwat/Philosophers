@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/25 18:11:56 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:25:23 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	*routine(void	*ptr)
 {
-	t_time		time;
+	// t_time		time;
 	t_philo		*philo;
 	t_action	action[4];
 	int			i;
@@ -27,7 +27,7 @@ void	*routine(void	*ptr)
 	philo = (t_philo *)ptr;
 	get_action_tab(action);
 	synchronize_launch(philo->table->start);
-	time = get_timestamp_in_millisec(philo->table->start);
+	// time = get_timestamp_in_millisec(philo->table->start);
 	pthread_create(&philo->death_thread, NULL, death_routine, philo);
 	if (philo->index % 2 == 0)
 	{

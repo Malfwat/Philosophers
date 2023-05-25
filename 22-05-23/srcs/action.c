@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/25 18:16:42 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:24:52 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ bool	philo_sleep(t_philo *philo)
 
 bool	think(t_philo *philo)
 {
-	t_time	time_point;
+	// t_time	time_point;
 
-	time_point = get_time_point();
+	// time_point = get_time_point();
 	my_print(philo, "is thinking");
 	if (is_death(philo->table))
 		return (false);
