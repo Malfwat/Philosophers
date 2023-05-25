@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/25 21:36:18 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/25 23:28:34 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ bool	think(t_philo *philo)
 	if (is_death(philo->table))
 		return (false);
 	t_eat = philo->table->params.eating;
-	return (waiting(philo, philo->last_meal, t_eat * 2));
+	return (waiting(philo, philo->last_meal, t_eat * 2 - 1));
 }
 
 void	get_action_tab(t_action *tab)
