@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:51:30 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/25 16:14:21 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:04:24 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	my_print(t_philo *philo, char *str)
 {
 	t_time	time;
-	
+
 	pthread_mutex_lock(philo->table->mutex_print);
 	time = get_timestamp_in_millisec(philo->table->start);
 	if (!is_death(philo->table))

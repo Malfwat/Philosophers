@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/25 17:39:11 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:11:56 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	*routine(void	*ptr)
 	if (philo->index % 2 == 0)
 	{
 		think(philo);
-		waiting(philo, philo->table->start, 10);
+		// usleep();
+		// waiting(philo, philo->table->start, 1);
 	}
 	i = 0;
 	while (!is_death(philo->table) && !are_fed_up(philo->table))

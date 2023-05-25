@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/25 17:48:53 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:07:49 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <philo_structs.h>
 #include <philo_defines.h>
 #include <stdio.h>
+#include <unistd.h>
 
 bool	waiting(t_philo *philo, t_time time_point, t_time to_wait)
 {
@@ -60,16 +61,16 @@ bool	eat(t_philo *philo)
 	bool		exit_value;
 	enum e_fork	tab[2];
 
-	// if (philo->index % 2)
-	// {
+	if (philo->index % 2)
+	{
 		tab[FIRST] = philo->mutex_index[RIGHT_FORK];
 		tab[SEC] = philo->mutex_index[MY_FORK];
-	// }
-	// else
-	// {
-	// 	tab[FIRST] = philo->mutex_index[MY_FORK];
-	// 	tab[SEC] = philo->mutex_index[RIGHT_FORK];
-	// }
+	}
+	else
+	{
+		tab[FIRST] = philo->mutex_index[MY_FORK];
+		tab[SEC] = philo->mutex_index[RIGHT_FORK];
+	}
 	if (!get_cutlery(philo, tab))
 		return (false);
 	my_print(philo, "is eating");
@@ -93,6 +94,7 @@ bool	think(t_philo *philo)
 	my_print(philo, "is thinking");
 	if (is_death(philo->table))
 		return (false);
+	usleep(500);
 	return (true);
 	// if (philo->table->params.nb_of_philo % 2 == 1)
 		// return (waiting(philo, time_point, philo->table->params.eating));
