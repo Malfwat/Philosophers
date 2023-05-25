@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/25 21:01:42 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/25 21:44:20 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	*routine(void	*ptr)
 	{
 		my_print(philo, "is thinking");
 			// think(philo);
-		// usleep();
 		waiting(philo, philo->table->start, philo->table->params.eating);
 	}
 	i = 0;
