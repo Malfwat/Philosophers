@@ -2,6 +2,7 @@
 	"files.associations": {
 		"philo_defines.h": "c",
 		"philo_time.h": "c",
-		"philo_structs.h": "c"
+		"philo_structs.h": "c",
+		"stdbool.h": "c"
 	}
 }

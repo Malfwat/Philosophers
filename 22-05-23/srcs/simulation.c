@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/26 19:38:44 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:59:08 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*routine(void	*ptr)
 	get_action_tab(action);
 	synchronize_launch(philo->table->start);
 	pthread_create(&philo->death_thread, NULL, death_routine, philo);
-	pthread_detach(philo->death_thread);
+	// pthread_detach(philo->death_thread);
 	if (philo->index % 2 == 0)
 	{
 		my_print(philo, "is thinking");
