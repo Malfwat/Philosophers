@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/26 12:48:55 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/26 19:38:44 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,38 @@
 #include <philosophers.h>
 #include <unistd.h>
 
+void	*debug(void *addr)
+{
+	(void)addr;
+	return (NULL);
+}
+
 void	*routine(void	*ptr)
 {
 	t_philo		*philo;
 	t_action	action[4];
-	pthread_t	test;
-	// int			i;
+	// pthread_t	test;
+	int			i;
 
 	philo = (t_philo *)ptr;
 	get_action_tab(action);
 	synchronize_launch(philo->table->start);
-	pthread_create(&test, NULL, death_routine, philo);
-	// if (philo->index % 2 == 0)
-	// {
-		// my_print(philo, "is thinking");
-		// waiting(philo, philo->table->start, philo->table->params.eating);
-	// }
-	// i = 0;
-	// while (!is_death(philo->table) && !are_fed_up(philo->table))
-	// {
-	// 	if (!action[i])
-	// 		i = 0;
-	// 	if (!action[i](philo))
-	// 		break ;
-	// 	i++;
-	// }
-	pthread_join(test, NULL);
+	pthread_create(&philo->death_thread, NULL, death_routine, philo);
+	pthread_detach(philo->death_thread);
+	if (philo->index % 2 == 0)
+	{
+		my_print(philo, "is thinking");
+		waiting(philo, philo->table->start, philo->table->params.eating);
+	}
+	i = 0;
+	while (!is_death(philo->table) && !are_fed_up(philo->table))
+	{
+		if (!action[i])
+			i = 0;
+		if (!action[i](philo))
+			break ;
+		i++;
+	}
 	return (NULL);
 }
 
