@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   table.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/24 17:49:54 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:23:02 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ bool	fill_philo_tab(t_table *table, t_philo *tab, int size)
 		tab[i].index = i + 1;
 		printf("philo: %i, mutxtab:[%i][%i]\n", tab[i].index, tab[i].mutex_index[MY_FORK], tab[i].mutex_index[RIGHT_FORK]);
 		tab[i].table = table;
+		if (pthread_mutex_init(&tab[i].mutex_eating, NULL))
+			return (false);
 	}
 	return (true);
 }

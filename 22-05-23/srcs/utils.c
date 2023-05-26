@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:18:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/25 17:37:50 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:28:05 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,34 @@ bool	set_death(t_table *table)
 
 bool	is_death(t_table *table)
 {
+	bool	exit_value;
+
+	exit_value = false;
+	pthread_mutex_lock(table->mutex_stop);
 	if (table->stop == DEATH)
-		return (true);
-	return (false);
+		exit_value = true;
+	pthread_mutex_unlock(table->mutex_stop);
+	return (exit_value);
 }
 
 bool	is_dead(t_philo *philo)
 {
 	t_time	time_to_die;
+	t_time	time_point;
 
 	time_to_die = philo->table->params.dying;
 	if (!philo->last_meal)
-	{
-		if (get_timestamp_in_millisec(philo->table->start) > time_to_die)
-		{
-			my_print(philo, "is dead");
-			return (true);
-		}
-	}
+		time_point = philo->table->start;
 	else
 	{
-		if (get_timestamp_in_millisec(philo->last_meal) > time_to_die)
-		{
-			my_print(philo, "is dead");
-			return (true);
-		}
+		pthread_mutex_lock(&philo->mutex_eating);
+		time_point = philo->last_meal;
+		pthread_mutex_unlock(&philo->mutex_eating);
+	}
+	if (get_timestamp_in_millisec(time_point) > time_to_die)
+	{
+		my_print(philo, "is dead");
+		return (true);
 	}
 	return (false);
 }
