@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/26 12:29:12 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/27 18:20:58 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	get_cutlery(t_philo *philo, enum e_fork *tab)
 		return (drop_cutlery(philo, tab), false);
 	pthread_mutex_lock(&philo->mutex_eating);
 	philo->last_meal = get_time_point();
-	pthread_mutex_lock(&philo->mutex_eating);
+	pthread_mutex_unlock(&philo->mutex_eating);
 	return (true);
 }
 

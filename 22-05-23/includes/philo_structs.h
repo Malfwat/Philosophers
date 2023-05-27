@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:43:18 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/26 19:53:22 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:33:56 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct	s_table
 	t_time			start;
 	t_params		params;
 	pthread_mutex_t	*mutex_cutlery;
-	pthread_mutex_t	*mutex_stop;
-	pthread_mutex_t	*mutex_print;
+	pthread_mutex_t	mutex_stop;
+	pthread_mutex_t	mutex_print;
 }t_table;
 
 typedef struct	s_philosopher

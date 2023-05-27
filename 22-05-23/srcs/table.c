@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/26 19:54:00 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:57:08 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	free_table(t_table *table)
 {
 	int	i;
 
-	if (table->mutex_stop)
-	{
-		pthread_mutex_destroy(table->mutex_stop);
-		free(table->mutex_stop);
-	}
-	if (table->mutex_print)
-	{
-		pthread_mutex_destroy(table->mutex_print);
-		free(table->mutex_print);
-	}
+	// if (table->mutex_stop)
+	// {
+		pthread_mutex_destroy(&table->mutex_stop);
+		// free(table->mutex_stop);
+	// }
+	// if (table->mutex_print)
+	// {
+		pthread_mutex_destroy(&table->mutex_print);
+		// free(table->mutex_print);
+	// }
 	if (table->mutex_cutlery)
 	{
 		i = 0;
@@ -52,11 +52,11 @@ t_table	*create_table(int ac, char **av)
 		return (write(2, "Error malloc\n", 13), NULL);
 	if (!init_params(&table->params, ac, av))
 		return (NULL);
-	table->mutex_stop = ft_calloc(1, sizeof(pthread_mutex_t));
-	if (!table->mutex_stop || pthread_mutex_init(table->mutex_stop, NULL))
+	/* table->mutex_stop = ft_calloc(1, sizeof(pthread_mutex_t)); */
+	if (/* !table->mutex_stop ||  */pthread_mutex_init(&table->mutex_stop, NULL))
 		return (write(2, "Error malloc\n", 13), NULL);
-	table->mutex_print = ft_calloc(1, sizeof(pthread_mutex_t));
-	if (!table->mutex_print || pthread_mutex_init(table->mutex_print, NULL))
+	/* table->mutex_print = ft_calloc(1, sizeof(pthread_mutex_t)); */
+	if (/* !table->mutex_print ||  */pthread_mutex_init(&table->mutex_print, NULL))
 		return (free_table(table), write(2, "Error malloc\n", 13), NULL);
 	table->mutex_cutlery = ft_calloc(1, sizeof(pthread_mutex_t) * (table->params.nb_of_philo + 1));
 	if (!table->mutex_cutlery)
