@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/27 19:27:14 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:27:40 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,20 @@ void	*routine(void	*ptr)
 	pthread_mutex_lock(&philo->mutex_eating);
 	philo->last_meal = philo->table->start;
 	pthread_mutex_unlock(&philo->mutex_eating);
-	// pthread_create(&philo->death_thread, NULL, debug, philo);
-	// pthread_create(&philo->death_thread, NULL, death_routine, philo);
 	if (philo->index % 2 == 0)
 	{
 		my_print(philo, "is thinking");
 		waiting(philo, philo->table->start, philo->table->params.eating);
 	}
 	i = 0;
-	// j = 0;
 	while (!is_death(philo->table) && !are_fed_up(philo->table))
 	{
-		// if (j++ == 10)
-			// set_death(philo->table);
 		if (!action[i])
 			i = 0;
 		if (!action[i](philo))
 			break ;
 		i++;
 	}
-	// pthread_join(philo->death_thread, NULL);
 	return (NULL);
 }
 
