@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 19:21:02 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:59:40 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ bool	get_cutlery(t_philo *philo, enum e_fork *tab)
 	pthread_mutex_lock(&philo->table->mutex_cutlery[tab[SEC]]);
 	if (is_death(philo->table))
 		return (drop_cutlery(philo, tab), false);
-	pthread_mutex_lock(&philo->mutex_eating);
 	philo->last_meal = get_time_point();
-	pthread_mutex_unlock(&philo->mutex_eating);
 	return (true);
 }
 
@@ -99,16 +97,13 @@ bool	think(t_philo *philo)
 	if (is_death(philo->table))
 		return (false);
 	t_eat = philo->table->params.eating;
-	return (waiting(philo, philo->last_meal, t_eat * 2 - 1));
+	return (waiting(philo, philo->last_meal, t_eat * 2));
 }
 
 void	get_action_tab(t_action *tab)
 {
 	tab[0] = &eat;
-	tab[1] = &is_dead;
-	tab[2] = &philo_sleep;
-	tab[3] = &is_dead;
-	tab[4] = &think;
-	tab[5] = &is_dead;
-	tab[6] = NULL;
+	tab[1] = &philo_sleep;
+	tab[2] = &think;
+	tab[3] = NULL;
 }

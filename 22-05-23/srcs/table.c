@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 17:57:08 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:00:01 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ bool	fill_philo_tab(t_table *table, t_philo *tab, int size)
 			tab[i].mutex_index[RIGHT_FORK] = i + 1;
 		tab[i].mutex_index[MY_FORK] = i;
 		tab[i].index = i + 1;
-		printf("philo: %i, mutxtab:[%i][%i]\n", tab[i].index, tab[i].mutex_index[MY_FORK], tab[i].mutex_index[RIGHT_FORK]);
+		// printf("philo: %i, mutxtab:[%i][%i]\n", tab[i].index, tab[i].mutex_index[MY_FORK], tab[i].mutex_index[RIGHT_FORK]);
 		tab[i].table = table;
-		if (pthread_mutex_init(&tab[i].mutex_eating, NULL))
-			return (false);
+		// if (pthread_mutex_init(&tab[i].mutex_eating, NULL))
+			// return (false);
 	}
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/27 19:27:40 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:56:38 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ void	*debug(void *addr)
 void	*routine(void	*ptr)
 {
 	t_philo		*philo;
-	t_action	action[7];
+	t_action	action[4];
 	int			i;
 
 	philo = (t_philo *)ptr;
 	get_action_tab(action);
 	synchronize_launch(philo->table->start);
-	pthread_mutex_lock(&philo->mutex_eating);
 	philo->last_meal = philo->table->start;
-	pthread_mutex_unlock(&philo->mutex_eating);
 	if (philo->index % 2 == 0)
 	{
 		my_print(philo, "is thinking");
@@ -47,6 +45,7 @@ void	*routine(void	*ptr)
 			i = 0;
 		if (!action[i](philo))
 			break ;
+		is_dead(philo);
 		i++;
 	}
 	return (NULL);

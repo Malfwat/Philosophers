@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+         #
+#    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/27 09:43:50 by malfwa           ###   ########.fr        #
+#    Updated: 2023/05/27 19:52:40 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,21 +25,33 @@ SRCS	=	$(SRCS_DIR)action.c \
 			$(SRCS_DIR)time.c \
 			$(SRCS_DIR)utils.c
 
-CFLAGS	=	-Wall -Wextra -Werror -g3 $(INCLUDES) 
+CFLAGS	=	-Wall -Wextra -Werror -g3 -MMD -MP 
 
 CC		=	cc
 
-OBJS	=	$(SRCS:.c=.o)
+OBJS_DIR	=	.build/
 
-INCLUDES	= -I./includes/
+OBJS	=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+
+DEPS	=	$(OBJS:.o=.d)
+
+DIRS	=	.build/srcs
+
+INCLUDES	= -I./includes
 
 all:	$(NAME)
 
-$(NAME):	$(OBJS)
+$(DIRS):
+	@mkdir -p $@
+
+$(OBJS_DIR)%.o:	%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(NAME):	$(DIRS) $(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
 
 clean:
-	rm -fr *.o */*.o
+	rm -fr .build
 
 fclean:	clean
 	rm -rf $(NAME)
@@ -47,3 +59,5 @@ fclean:	clean
 re: fclean all 
 
 .PHONY: re clean all fclean 
+
+-include $(DEPS)
