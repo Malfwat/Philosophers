@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 20:21:29 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:36:55 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ bool	eat(t_philo *philo)
 	bool		exit_value;
 	enum e_fork	tab[2];
 
-	// if (philo->index % 2 == 0)
-	// {
+	if (philo->index % 2)
+	{
 		tab[FIRST] = philo->mutex_index[RIGHT_FORK];
 		tab[SEC] = philo->mutex_index[MY_FORK];
-	// }
-	// else
-	// {
-		// tab[FIRST] = philo->mutex_index[MY_FORK];
-		// tab[SEC] = philo->mutex_index[RIGHT_FORK];
-	// }
+	}
+	else
+	{
+		tab[FIRST] = philo->mutex_index[MY_FORK];
+		tab[SEC] = philo->mutex_index[RIGHT_FORK];
+	}
 	if (!get_cutlery(philo, tab))
 		return (false);
 	my_print(philo, "is eating");

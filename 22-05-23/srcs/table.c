@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 20:07:11 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:24:03 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,8 @@ void	free_table(t_table *table)
 {
 	int	i;
 
-	// if (table->mutex_stop)
-	// {
-		pthread_mutex_destroy(&table->mutex_stop);
-		// free(table->mutex_stop);
-	// }
-	// if (table->mutex_print)
-	// {
-		pthread_mutex_destroy(&table->mutex_print);
-		// free(table->mutex_print);
-	// }
+	pthread_mutex_destroy(&table->mutex_stop);
+	pthread_mutex_destroy(&table->mutex_print);
 	if (table->mutex_cutlery)
 	{
 		i = 0;
@@ -92,10 +84,7 @@ bool	fill_philo_tab(t_table *table, t_philo *tab, int size)
 			tab[i].mutex_index[RIGHT_FORK] = i + 1;
 		tab[i].mutex_index[MY_FORK] = i;
 		tab[i].index = i + 1;
-		// printf("philo: %i, mutxtab:[%i][%i]\n", tab[i].index, tab[i].mutex_index[MY_FORK], tab[i].mutex_index[RIGHT_FORK]);
 		tab[i].table = table;
-		// if (pthread_mutex_init(&tab[i].mutex_eating, NULL))
-			// return (false);
 	}
 	return (true);
 }

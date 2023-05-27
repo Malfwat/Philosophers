@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:55:45 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/25 18:01:32 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:28:37 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef int	t_stop;
 # define TIME_MIN 60
 # define INFINITE -1
 # define DEATH -1
-# define LAUNCH_LAPS 350
+# define LAUNCH_LAPS 650
 # define FIRST 0
 # define SEC 1
 
