@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 18:20:58 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:21:02 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ bool	think(t_philo *philo)
 void	get_action_tab(t_action *tab)
 {
 	tab[0] = &eat;
-	tab[1] = &philo_sleep;
-	tab[2] = &think;
-	tab[3] = NULL;
+	tab[1] = &is_dead;
+	tab[2] = &philo_sleep;
+	tab[3] = &is_dead;
+	tab[4] = &think;
+	tab[5] = &is_dead;
+	tab[6] = NULL;
 }

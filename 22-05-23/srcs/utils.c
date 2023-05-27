@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:18:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 18:24:23 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:25:40 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,23 @@ bool	is_dead(t_philo *philo)
 	if (get_timestamp_in_millisec(time_point) > time_to_die)
 	{
 		my_print(philo, "is dead");
-		return (true);
+		return (set_death(philo->table));
 	}
-	return (false);
+	return (true);
 }
 
-void	*death_routine(void *addr)
-{
-	t_philo	*philo;
+// void	*death_routine(void *addr)
+// {
+// 	t_philo	*philo;
 
-	philo = (t_philo *)addr;
-	while (!is_death(philo->table) && !are_fed_up(philo->table))
-	{
-		if (is_dead(philo) && set_death(philo->table))
-			return (NULL);
-	}
-	return (NULL);
-}
+// 	philo = (t_philo *)addr;
+// 	while (!is_death(philo->table) && !are_fed_up(philo->table))
+// 	{
+// 		if (is_dead(philo) && set_death(philo->table))
+// 			return (NULL);
+// 	}
+// 	return (NULL);
+// }
 
 bool	are_fed_up(t_table *table)
 {
