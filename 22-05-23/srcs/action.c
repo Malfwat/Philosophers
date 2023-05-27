@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 19:59:40 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:05:07 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	eat(t_philo *philo)
 	bool		exit_value;
 	enum e_fork	tab[2];
 
-	if (philo->index % 2 == 1)
+	if (philo->index % 2 == 0)
 	{
 		tab[FIRST] = philo->mutex_index[RIGHT_FORK];
 		tab[SEC] = philo->mutex_index[MY_FORK];
