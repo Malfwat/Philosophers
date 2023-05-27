@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/28 01:04:20 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 01:51:45 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,23 @@ void	*debug(void *addr)
 
 void	routine_even(t_philo *philo)
 {
-	if (philo->index % 2)
+	int	nb_p;
+
+	nb_p = philo->table->params.nb_of_philo;
+	my_print(philo, "is thinking");
+	if (nb_p % 2)
 	{
-		my_print(philo, "is thinking");
-		waiting(philo, philo->table->start, philo->table->params.eating);
+		if (philo->index == nb_p)
+			waiting(philo, philo->table->start, philo->table->params.eating + philo->table->params.eating / 2);
+		else if (philo->index % 2)
+			waiting(philo, philo->table->start, philo->table->params.eating);
+	}
+	else 
+	{
+		if (philo->index % 2)
+		{
+			waiting(philo, philo->table->start, philo->table->params.eating);
+		}
 	}	
 }
 
