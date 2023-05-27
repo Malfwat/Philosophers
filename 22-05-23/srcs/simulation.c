@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/27 19:21:06 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:27:14 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*routine(void	*ptr)
 	if (philo->index % 2 == 0)
 	{
 		my_print(philo, "is thinking");
-		waiting(philo, philo->table->start, philo->table->params.eating / 2);
+		waiting(philo, philo->table->start, philo->table->params.eating);
 	}
 	i = 0;
 	// j = 0;

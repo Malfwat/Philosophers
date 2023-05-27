@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:18:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 19:25:40 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:27:02 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,6 @@ bool	is_dead(t_philo *philo)
 	}
 	return (true);
 }
-
-// void	*death_routine(void *addr)
-// {
-// 	t_philo	*philo;
-
-// 	philo = (t_philo *)addr;
-// 	while (!is_death(philo->table) && !are_fed_up(philo->table))
-// 	{
-// 		if (is_dead(philo) && set_death(philo->table))
-// 			return (NULL);
-// 	}
-// 	return (NULL);
-// }
 
 bool	are_fed_up(t_table *table)
 {
