@@ -6,7 +6,7 @@
 #    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/27 19:52:40 by amouflet         ###   ########.fr        #
+#    Updated: 2023/05/27 21:13:32 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ all:	$(NAME)
 $(DIRS):
 	@mkdir -p $@
 
-$(OBJS_DIR)%.o:	%.c
+$(OBJS_DIR)%.o:	%.c Makefile
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME):	$(DIRS) $(OBJS)
