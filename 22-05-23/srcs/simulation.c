@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/27 20:30:09 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 21:05:05 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*routine(void	*ptr)
 	get_action_tab(action);
 	synchronize_launch(philo->table->start);
 	philo->last_meal = philo->table->start;
-	if (philo->index % 2 == 0)
+	if (philo->index % 2 == 1)
 	{
 		my_print(philo, "is thinking");
 		waiting(philo, philo->table->start, philo->table->params.eating);

@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 20:36:55 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 21:03:56 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ bool	think(t_philo *philo)
 	if (is_death(philo->table))
 		return (false);
 	t_eat = philo->table->params.eating;
+	if (philo->table->params.nb_of_philo % 2)
+		return (waiting(philo, philo->last_meal, t_eat * 3));
 	return (waiting(philo, philo->last_meal, t_eat * 2));
 }
 
