@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/27 19:56:38 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:13:41 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	*routine(void	*ptr)
 	philo->last_meal = philo->table->start;
 	if (philo->index % 2 == 0)
 	{
+		ft_putstr("je passe\n");
 		my_print(philo, "is thinking");
 		waiting(philo, philo->table->start, philo->table->params.eating);
 	}
+	is_dead(philo);
 	i = 0;
 	while (!is_death(philo->table) && !are_fed_up(philo->table))
 	{
