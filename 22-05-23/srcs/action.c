@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 20:05:07 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:21:29 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool	waiting(t_philo *philo, t_time time_point, t_time to_wait)
 {
 	while (get_timestamp_in_millisec(time_point) < to_wait)
 	{
+		is_dead(philo);
 		if (is_death(philo->table))
 			return (false);
 	}
@@ -37,6 +38,7 @@ void	drop_cutlery(t_philo *philo, enum e_fork *tab)
 bool	get_cutlery(t_philo *philo, enum e_fork *tab)
 {
 	pthread_mutex_lock(&philo->table->mutex_cutlery[tab[FIRST]]);
+	is_dead(philo);
 	if (is_death(philo->table))
 	{
 		pthread_mutex_unlock(&philo->table->mutex_cutlery[tab[FIRST]]);
@@ -47,9 +49,10 @@ bool	get_cutlery(t_philo *philo, enum e_fork *tab)
 	{
 		pthread_mutex_unlock(&philo->table->mutex_cutlery[tab[FIRST]]);
 		waiting(philo, philo->table->start, philo->table->params.dying + 1);
-		return (is_dead(philo), set_death(philo->table));
+		return (is_dead(philo));
 	}
 	pthread_mutex_lock(&philo->table->mutex_cutlery[tab[SEC]]);
+	is_dead(philo);
 	if (is_death(philo->table))
 		return (drop_cutlery(philo, tab), false);
 	philo->last_meal = get_time_point();
@@ -61,16 +64,16 @@ bool	eat(t_philo *philo)
 	bool		exit_value;
 	enum e_fork	tab[2];
 
-	if (philo->index % 2 == 0)
-	{
+	// if (philo->index % 2 == 0)
+	// {
 		tab[FIRST] = philo->mutex_index[RIGHT_FORK];
 		tab[SEC] = philo->mutex_index[MY_FORK];
-	}
-	else
-	{
-		tab[FIRST] = philo->mutex_index[MY_FORK];
-		tab[SEC] = philo->mutex_index[RIGHT_FORK];
-	}
+	// }
+	// else
+	// {
+		// tab[FIRST] = philo->mutex_index[MY_FORK];
+		// tab[SEC] = philo->mutex_index[RIGHT_FORK];
+	// }
 	if (!get_cutlery(philo, tab))
 		return (false);
 	my_print(philo, "is eating");
