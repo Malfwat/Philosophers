@@ -6,7 +6,7 @@
 #    By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/27 09:42:57 by malfwa           ###   ########.fr        #
+#    Updated: 2023/05/27 09:43:50 by malfwa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,9 @@ $(NAME):	$(OBJS)
 clean:
 	rm -fr *.o */*.o
 
-re: clean all 
+fclean:	clean
+	rm -rf $(NAME)
 
-.PHONY: re clean all 
+re: fclean all 
+
+.PHONY: re clean all fclean 
