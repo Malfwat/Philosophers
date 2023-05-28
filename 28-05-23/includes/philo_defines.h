@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:55:45 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 00:37:17 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 11:21:09 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef int	t_stop;
 # define TIME_MIN 60
 # define INFINITE -1
 # define DEATH -1
-# define LAUNCH_LAPS 650
+# define LAUNCH_LAPS 150
 # define FIRST 0
 # define SEC 1
 

@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 02:34:10 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 12:42:37 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_table	*create_table(int ac, char **av)
 	while (i < table->params.nb_of_philo)
 	{
 		if (pthread_mutex_init(&table->mutex_cutlery[i++], NULL))
-			return (free_table(table), NULL);
+			return (free_table(table), write(2, "Error mutex init\n", 13), NULL);
 	}
 	return (table);
 }

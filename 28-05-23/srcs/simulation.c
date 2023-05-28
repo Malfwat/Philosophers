@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/28 03:01:58 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 12:23:38 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 #include <stdio.h>
 #include <philosophers.h>
 #include <unistd.h>
-
-void	*debug(void *addr)
-{
-	(void)addr;
-	return (NULL);
-}
 
 void	spread_launch(t_philo *philo)
 {
