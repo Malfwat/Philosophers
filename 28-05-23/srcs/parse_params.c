@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:29 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:04:47 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:13:26 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	init_params(t_params *params, int ac, char **av)
 	params->nb_of_philo = ft_atoi(av[1]);
 	if (params->nb_of_philo > NB_MAX_PHILO || !params->nb_of_philo)
 	{
-		printf("The number of philosophers must be between 0 and 300\n");
+		printf("The number of philosophers must be between 1 and 300\n");
 		return (print_usage(), false);
 	}
 	params->dying = ft_atoi(av[2]);

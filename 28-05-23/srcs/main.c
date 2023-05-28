@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:22:37 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 12:39:37 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 22:08:04 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 #include <stdio.h>
-// #include <philo_struct.h>
 
 int	main(int ac, char **av)
 {

@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/28 21:29:05 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:12:43 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	*routine(void	*ptr)
 	int			i;
 
 	philo = (t_philo *)ptr;
+	if (are_fed_up(philo->table))
+		return (NULL);
 	get_action_tab(action);
 	philo->last_meal = philo->table->start;
 	synchronize_launch(philo->table->start);
