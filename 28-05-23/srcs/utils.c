@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:18:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:11:56 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:40:35 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ bool	are_fed_up(t_table *table)
 
 	exit_value = false;
 	pthread_mutex_lock(&table->mutex_stop);
-	if (table->stop == table->params.nb_of_philo || table->params.nb_of_meal_needed == 0)
+	if (table->stop == table->params.nb_of_philo \
+	|| table->params.nb_of_meal_needed == 0)
 		exit_value = true;
 	pthread_mutex_unlock(&table->mutex_stop);
 	return (exit_value);

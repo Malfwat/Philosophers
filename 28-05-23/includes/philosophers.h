@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:23:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 21:46:27 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:46:30 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,23 @@ t_supervisor	*create_supervisor(t_table *table);
 void			simulation(t_supervisor *supervisor);
 void			free_supervisor(t_supervisor *ptr);
 
-void	my_print(t_philo *philo, char *str);
-bool	philo_sleep(t_philo *philo);
-bool	eat(t_philo *philo);
-bool	think(t_philo *philo);
-void	get_action_tab(t_action *tab);
+void			my_print(t_philo *philo, char *str);
+bool			philo_sleep(t_philo *philo);
+bool			eat(t_philo *philo);
+bool			think(t_philo *philo);
+void			get_action_tab(t_action *tab);
 
+bool			set_death(t_table *table);
+bool			is_death(t_table *table);
+bool			is_dead(t_philo *philo);
+bool			are_fed_up(t_table *table);
+void			add_meal(t_philo *philo);
 
+void			ft_putstr(char *str);
 
-bool	set_death(t_table *table);
-bool	is_death(t_table *table);
-bool	is_dead(t_philo *philo);
-bool	are_fed_up(t_table *table);
-void	add_meal(t_philo *philo);
-
-
-void	ft_putstr(char *str);
-
-bool	waiting(t_philo *philo, t_time time_point, t_time to_wait);
-void	nano_sleeps(__useconds_t time);
+bool			waiting(t_philo *philo, t_time time_point, t_time to_wait);
+void			nano_sleeps(__useconds_t time);
+void			drop_cutlery(t_philo *philo, enum e_fork *tab);
+bool			get_cutlery(t_philo *philo, enum e_fork *tab);
 
 #endif /* PHILOSOPHERS_H */

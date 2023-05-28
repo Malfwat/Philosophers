@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:29 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:13:26 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:45:52 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	is_positiv_int(char	*number)
 bool	check_params(char **av)
 {
 	int	i;
-	
+
 	i = 1;
 	while (av[i])
 	{
@@ -97,6 +97,7 @@ bool	init_params(t_params *params, int ac, char **av)
 		printf("The time laps must be equal or greater than 60\n");
 		return (print_usage(), false);
 	}
-	params->nb_of_meal_needed = (int []){ft_atoi(av[5]) , INFINITE}[(av[5] == NULL)];
+	params->nb_of_meal_needed = (int []){ft_atoi(av[5]), \
+	INFINITE}[(av[5] == NULL)];
 	return (true);
 }

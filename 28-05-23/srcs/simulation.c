@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/28 22:12:43 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:42:33 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	spread_launch(t_philo *philo)
 	if (philo->index % 2)
 		my_print(philo, "is thinking");
 	if (nb_p % 2 && philo->index == nb_p)
-		waiting(philo, philo->table->start, philo->table->params.eating + philo->table->params.eating / 2);
+		waiting(philo, philo->table->start, philo->table->params.eating \
+		+ philo->table->params.eating / 2);
 	else if (philo->index % 2)
 		waiting(philo, philo->table->start, philo->table->params.eating);
 }
@@ -63,10 +64,12 @@ void	simulation(t_supervisor *supervisor)
 	int	i;
 
 	supervisor->table->start = get_time_point();
-	supervisor->table->start = get_departure_time(supervisor->table->params.nb_of_philo);
+	supervisor->table->start = get_departure_time \
+	(supervisor->table->params.nb_of_philo);
 	i = -1;
 	while (++i < supervisor->table->params.nb_of_philo)
-		pthread_create(&supervisor->philo_tab[i].thread, NULL, routine, &supervisor->philo_tab[i]);
+		pthread_create(&supervisor->philo_tab[i].thread, NULL, routine, \
+		&supervisor->philo_tab[i]);
 	i = -1;
 	while (++i < supervisor->table->params.nb_of_philo)
 		pthread_join(supervisor->philo_tab[i].thread, NULL);

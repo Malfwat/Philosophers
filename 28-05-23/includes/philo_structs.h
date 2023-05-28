@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:43:18 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/27 22:43:23 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 22:47:58 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 
 typedef struct s_params
 {
-	int	nb_of_philo;
+	int		nb_of_philo;
 	t_time	dying;
 	t_time	eating;
 	t_time	sleeping;
-	int	nb_of_meal_needed;
+	int		nb_of_meal_needed;
 }t_params;
 
-typedef struct	s_table
+typedef struct s_table
 {
 	t_stop			stop;
 	t_time			start;
@@ -36,7 +36,7 @@ typedef struct	s_table
 	pthread_mutex_t	mutex_print;
 }t_table;
 
-typedef struct	s_philosopher
+typedef struct s_philosopher
 {
 	int				index;
 	int				nb_meal_eaten;
@@ -48,13 +48,12 @@ typedef struct	s_philosopher
 	pthread_t		print_thread;
 }t_philo;
 
-typedef struct	s_supervisor
+typedef struct s_supervisor
 {
 	t_table	*table;
 	t_philo	*philo_tab;
 }t_supervisor;
 
-typedef bool (*t_action)(t_philo *);
-
+typedef bool	(*t_action)(t_philo *);
 
 #endif /* PHILO_STRUCTS_H */

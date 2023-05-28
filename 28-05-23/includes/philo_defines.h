@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   philo_defines.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:55:45 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 11:21:09 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 22:48:25 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_DEFINES_H
 # define PHILO_DEFINES_H
 
-typedef long long t_time;
-typedef int	t_stop;
+typedef long long	t_time;
+typedef int			t_stop;
 
 # define INT_MAX_LEN 10
 # define NB_MAX_PHILO 300
@@ -25,7 +25,7 @@ typedef int	t_stop;
 # define FIRST 0
 # define SEC 1
 
-enum e_fork
+enum	e_fork
 {
 	LEFT_FORK,
 	RIGHT_FORK
