@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/28 12:23:38 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 21:29:05 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	spread_launch(t_philo *philo)
 	int	nb_p;
 
 	nb_p = philo->table->params.nb_of_philo;
-	my_print(philo, "is thinking");
+	if (philo->index % 2)
+		my_print(philo, "is thinking");
 	if (nb_p % 2 && philo->index == nb_p)
 		waiting(philo, philo->table->start, philo->table->params.eating + philo->table->params.eating / 2);
 	else if (philo->index % 2)
@@ -37,8 +38,8 @@ void	*routine(void	*ptr)
 
 	philo = (t_philo *)ptr;
 	get_action_tab(action);
-	synchronize_launch(philo->table->start);
 	philo->last_meal = philo->table->start;
+	synchronize_launch(philo->table->start);
 	spread_launch(philo);
 	is_dead(philo);
 	i = 0;
@@ -59,6 +60,7 @@ void	simulation(t_supervisor *supervisor)
 {
 	int	i;
 
+	supervisor->table->start = get_time_point();
 	supervisor->table->start = get_departure_time(supervisor->table->params.nb_of_philo);
 	i = -1;
 	while (++i < supervisor->table->params.nb_of_philo)

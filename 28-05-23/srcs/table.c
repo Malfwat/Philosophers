@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   table.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 12:42:37 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 21:25:53 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,21 @@ void	free_supervisor(t_supervisor *ptr)
 	free(ptr);
 }
 
-bool	fill_philo_tab(t_table *table, t_philo *tab, int size)
+bool	fill_philo_tab(t_table *table, t_philo *philo, int size)
 {
 	int	i;
 
 	i = -1;
 	while (++i < size)
 	{
-		tab[i].table = table;
-		tab[i].index = i + 1;
+		philo[i].table = table;
+		philo[i].index = i + 1;
 		if (i - 1 < 0)
-			tab[i].mutex_index[RIGHT_FORK] = size - 1;
+			philo[i].mutex_index[LEFT_FORK] = size - 1;
 		else
-			tab[i].mutex_index[RIGHT_FORK] = i - 1;
-		tab[i].mutex_index[LEFT_FORK] = i;
-		printf("philo tab index: %i, [%i][%i]\n", tab[i].index, tab[i].mutex_index[LEFT_FORK], tab[i].mutex_index[RIGHT_FORK]);
+			philo[i].mutex_index[LEFT_FORK] = i - 1;
+		philo[i].mutex_index[RIGHT_FORK] = i;
+		// printf("philo index: %i, [%i][%i]\n", philo[i].index, philo[i].mutex_index[LEFT_FORK], philo[i].mutex_index[RIGHT_FORK]);
 	}
 	return (true);
 }

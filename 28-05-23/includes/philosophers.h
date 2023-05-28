@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:23:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 12:40:35 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 21:46:27 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <philo_structs.h>
+# include <unistd.h>
 
 bool			init_params(t_params *params, int ac, char **av);
 void			*ft_calloc(size_t nmemb, size_t size);
@@ -41,5 +42,6 @@ void	add_meal(t_philo *philo);
 void	ft_putstr(char *str);
 
 bool	waiting(t_philo *philo, t_time time_point, t_time to_wait);
+void	nano_sleeps(__useconds_t time);
 
 #endif /* PHILOSOPHERS_H */

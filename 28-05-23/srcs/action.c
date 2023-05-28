@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 11:51:29 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 21:50:51 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	waiting(t_philo *philo, t_time time_point, t_time to_wait)
 		is_dead(philo);
 		if (is_death(philo->table))
 			return (false);
+		usleep(500);
 	}
 	return (true);
 }
@@ -88,7 +89,8 @@ bool	philo_sleep(t_philo *philo)
 	bool	exit_value;
 	
 	my_print(philo, "is sleeping");
-	exit_value = waiting(philo, philo->last_meal + philo->table->params.eating, philo->table->params.sleeping);
+	// exit_value = waiting(philo, philo->last_meal + philo->table->params.eating, philo->table->params.sleeping);
+	exit_value = waiting(philo, get_time_point(), philo->table->params.sleeping);
 	return (exit_value);
 }
 
@@ -103,8 +105,8 @@ bool	think(t_philo *philo)
 	t_eat = philo->table->params.eating;
 	nb_p = philo->table->params.nb_of_philo;
 	if (nb_p % 2)
-		return (waiting(philo, philo->last_meal, t_eat * 3));
-	return (waiting(philo, philo->last_meal, t_eat * 2));
+		return (waiting(philo, philo->last_meal, t_eat * 2 + t_eat / 2));
+	return (waiting(philo, philo->last_meal, t_eat + t_eat / 2));
 }
 
 void	get_action_tab(t_action *tab)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:18:17 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 11:49:16 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 21:29:44 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	is_dead(t_philo *philo)
 	time_point = philo->last_meal;
 	if (get_timestamp_in_millisec(time_point) > time_to_die)
 	{
-		my_print(philo, "is dead");
+		my_print(philo, "died");
 		return (set_death(philo->table));
 	}
 	return (true);
