@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/28 01:51:45 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 02:07:01 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,17 @@ void	*debug(void *addr)
 	return (NULL);
 }
 
-void	routine_even(t_philo *philo)
+void	spread_launch(t_philo *philo)
 {
 	int	nb_p;
 
 	nb_p = philo->table->params.nb_of_philo;
 	my_print(philo, "is thinking");
-	if (nb_p % 2)
-	{
-		if (philo->index == nb_p)
-			waiting(philo, philo->table->start, philo->table->params.eating + philo->table->params.eating / 2);
-		else if (philo->index % 2)
-			waiting(philo, philo->table->start, philo->table->params.eating);
-	}
-	else 
-	{
-		if (philo->index % 2)
-		{
-			waiting(philo, philo->table->start, philo->table->params.eating);
-		}
-	}	
+	if (nb_p % 2 && philo->index == nb_p)
+		waiting(philo, philo->table->start, philo->table->params.eating + philo->table->params.eating / 2);
+	else if (philo->index % 2)
+		waiting(philo, philo->table->start, philo->table->params.eating);
 }
-
-// void	routine_odd(t_philo *philo)
-// {
-// 	if (philo->index % 3 == 0)
-// 	{
-// 		my_print(philo, "is thinking");
-// 		waiting(philo, philo->table->start, philo->table->params.eating);
-// 	}
-// 	if (philo->index % 3 == 1)
-// 	{
-// 		my_print(philo, "is thinking");
-// 		waiting(philo, philo->table->start, philo->table->params.eating * 2);
-// 	}
-// }
 
 void	*routine(void	*ptr)
 {
@@ -69,16 +45,14 @@ void	*routine(void	*ptr)
 	get_action_tab(action);
 	synchronize_launch(philo->table->start);
 	philo->last_meal = philo->table->start;
-	// if (philo->table->params.nb_of_philo % 3 == 2)
-		// routine_odd(philo);
-	// else
-	routine_even(philo);
+	spread_launch(philo);
 	is_dead(philo);
 	i = 0;
 	while (!is_death(philo->table) && !are_fed_up(philo->table))
 	{
 		if (!action[i])
 			i = 0;
+		is_dead(philo);
 		if (!action[i](philo))
 			break ;
 		is_dead(philo);
