@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 02:08:00 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 03:06:37 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool	philo_sleep(t_philo *philo)
 	bool	exit_value;
 	
 	my_print(philo, "is sleeping");
-	exit_value = waiting(philo, get_time_point() + philo->table->params.eating, philo->table->params.sleeping);
+	exit_value = waiting(philo, get_time_point(), philo->table->params.sleeping);
 	return (exit_value);
 }
 
@@ -103,10 +103,7 @@ bool	think(t_philo *philo)
 	t_eat = philo->table->params.eating;
 	nb_p = philo->table->params.nb_of_philo;
 	if (nb_p % 2)
-	{
-		if (philo->index == nb_p || philo->index == 1 || philo->index == 2)
-			return (waiting(philo, philo->last_meal, t_eat * 3));
-	}
+		return (waiting(philo, philo->last_meal, t_eat * 3));
 	return (waiting(philo, philo->last_meal, t_eat * 2));
 }
 
