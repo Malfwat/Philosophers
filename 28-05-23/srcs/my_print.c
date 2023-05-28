@@ -6,14 +6,14 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:51:30 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:40:38 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:55:59 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_defines.h>
 #include <philo_structs.h>
 #include <philo_time.h>
-#include <philosophers.h>
+#include <philo_actions.h>
 #include <pthread.h>
 #include <stdio.h>
 

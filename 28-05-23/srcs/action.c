@@ -6,17 +6,15 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:45:24 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:58:17 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philosophers.h>
 #include <pthread.h>
 #include <philo_time.h>
 #include <philo_structs.h>
 #include <philo_defines.h>
-#include <stdio.h>
-#include <unistd.h>
+#include <philo_actions.h>
 
 bool	eat(t_philo *philo)
 {

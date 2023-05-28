@@ -6,12 +6,11 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:22:37 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:40:11 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:59:12 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
-#include <stdio.h>
 
 int	main(int ac, char **av)
 {

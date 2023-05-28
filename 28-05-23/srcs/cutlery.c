@@ -6,14 +6,14 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 22:41:21 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:43:31 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:55:12 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <philo_structs.h>
 #include <philo_time.h>
-#include <philosophers.h>
+#include <philo_actions.h>
 
 void	drop_cutlery(t_philo *philo, enum e_fork *tab)
 {

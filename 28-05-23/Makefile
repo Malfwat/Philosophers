@@ -6,7 +6,7 @@
 #    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/28 22:43:17 by amouflet         ###   ########.fr        #
+#    Updated: 2023/05/28 22:50:43 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS	=	$(SRCS_DIR)action.c \
 			$(SRCS_DIR)simulation.c \
 			$(SRCS_DIR)table.c \
 			$(SRCS_DIR)time.c \
-			$(SRCS_DIR)utils.c
+			$(SRCS_DIR)ending.c
 
 CFLAGS	=	-Wall -Wextra -Werror -g3 -MMD -MP 
 

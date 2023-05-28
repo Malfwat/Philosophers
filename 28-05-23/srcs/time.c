@@ -6,17 +6,16 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:13:43 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:44:02 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 23:01:21 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_defines.h>
 #include <philo_structs.h>
 #include <sys/time.h>
-#include <stdlib.h>
 #include <philo_defines.h>
 #include <stdbool.h>
-#include <philosophers.h>
+#include <philo_actions.h>
 #include <unistd.h>
 
 t_time	get_time_point(void)

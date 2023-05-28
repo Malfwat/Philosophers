@@ -6,16 +6,14 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/05/28 22:42:33 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:59:52 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_time.h>
 #include <philo_defines.h>
 #include <philo_structs.h>
-#include <stdio.h>
-#include <philosophers.h>
-#include <unistd.h>
+#include <philo_actions.h>
 
 void	spread_launch(t_philo *philo)
 {
