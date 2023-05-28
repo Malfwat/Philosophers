@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:49:41 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 21:50:51 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/28 21:59:18 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ bool	philo_sleep(t_philo *philo)
 	bool	exit_value;
 	
 	my_print(philo, "is sleeping");
-	// exit_value = waiting(philo, philo->last_meal + philo->table->params.eating, philo->table->params.sleeping);
 	exit_value = waiting(philo, get_time_point(), philo->table->params.sleeping);
 	return (exit_value);
 }

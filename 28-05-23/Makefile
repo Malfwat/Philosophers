@@ -6,7 +6,7 @@
 #    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/27 21:13:32 by amouflet         ###   ########.fr        #
+#    Updated: 2023/05/28 21:59:48 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ SRCS_DIR	=	srcs/
 
 SRCS	=	$(SRCS_DIR)action.c \
 			$(SRCS_DIR)ft_calloc.c \
-			$(SRCS_DIR)ft_putstr.c \
 			$(SRCS_DIR)main.c \
 			$(SRCS_DIR)my_print.c \
 			$(SRCS_DIR)parse_params.c \
