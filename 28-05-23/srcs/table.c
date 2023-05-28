@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:40:57 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 00:44:49 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/05/28 02:34:10 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,11 @@ bool	fill_philo_tab(t_table *table, t_philo *tab, int size)
 	{
 		tab[i].table = table;
 		tab[i].index = i + 1;
-		if (tab[i].index % 2 == 1)
-		{
-			tab[i].mutex_index[LEFT_FORK] = i;
-			if (i + 1 == size)
-				tab[i].mutex_index[RIGHT_FORK] = 0;
-			else
-				tab[i].mutex_index[RIGHT_FORK] = i + 1;
-		}
+		if (i - 1 < 0)
+			tab[i].mutex_index[RIGHT_FORK] = size - 1;
 		else
-		{
 			tab[i].mutex_index[RIGHT_FORK] = i - 1;
-			tab[i].mutex_index[LEFT_FORK] = i;
-		}
+		tab[i].mutex_index[LEFT_FORK] = i;
 		printf("philo tab index: %i, [%i][%i]\n", tab[i].index, tab[i].mutex_index[LEFT_FORK], tab[i].mutex_index[RIGHT_FORK]);
 	}
 	return (true);
