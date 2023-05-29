@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+         #
+#    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/29 12:02:56 by malfwa           ###   ########.fr        #
+#    Updated: 2023/05/29 18:16:50 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ../philo
+NAME = ../philo_bonus
 
 SRCS_DIR	=	srcs/
 
