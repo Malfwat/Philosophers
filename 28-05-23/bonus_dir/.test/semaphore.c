@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:13:03 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/29 19:53:19 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:09:37 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(void)
 		printf("sec\n");
 		sem_close(sem);
 		exit(0);
+		sem_getvalue();
 	}
 	sleep(1);
 	printf("first\n");
