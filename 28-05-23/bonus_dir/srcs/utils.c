@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 15:22:37 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:59:12 by amouflet         ###   ########.fr       */
+/*   Created: 2023/05/31 14:46:28 by amouflet          #+#    #+#             */
+/*   Updated: 2023/05/31 14:48:10 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philosophers.h>
+#include <stdlib.h>
 
-int	main(int ac, char **av)
-{
-	t_supervisor	*supervisor;
-	t_table			*table;
+void	free_tab(char **tab)
+[
+	int	i;
 
-	table = create_table(ac, av);
-	if (!table)
-		return (2);
-	supervisor = create_supervisor(table);
-	if (!supervisor)
-		return (2);
-	simulation(supervisor);
-	free_supervisor(supervisor);
-	return (0);
-}
+	i = 0;
+	while (tab && tab[i])
+		free(tab[i++]);
+	free(tab);
+]

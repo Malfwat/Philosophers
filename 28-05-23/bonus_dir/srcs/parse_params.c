@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:29 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/28 22:45:52 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:41:35 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ bool	init_params(t_params *params, int ac, char **av)
 		return (print_usage());
 	if (!check_params(av))
 		return (false);
-	params->nb_of_philo = ft_atoi(av[1]);
-	if (params->nb_of_philo > NB_MAX_PHILO || !params->nb_of_philo)
+	params->nb_philo = ft_atoi(av[1]);
+	if (params->nb_philo > NB_MAX_PHILO || !params->nb_philo)
 	{
 		printf("The number of philosophers must be between 1 and 300\n");
 		return (print_usage(), false);
@@ -97,7 +97,7 @@ bool	init_params(t_params *params, int ac, char **av)
 		printf("The time laps must be equal or greater than 60\n");
 		return (print_usage(), false);
 	}
-	params->nb_of_meal_needed = (int []){ft_atoi(av[5]), \
+	params->nb_meal_needed = (int []){ft_atoi(av[5]), \
 	INFINITE}[(av[5] == NULL)];
 	return (true);
 }
