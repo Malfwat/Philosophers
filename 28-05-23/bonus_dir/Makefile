@@ -6,7 +6,7 @@
 #    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/06/02 13:54:30 by amouflet         ###   ########.fr        #
+#    Updated: 2023/06/02 14:10:17 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS	=	$(SRCS_DIR)create_table.c	\
 			$(SRCS_DIR)ft_calloc.c		\
 			$(SRCS_DIR)parse_params.c	\
 			$(SRCS_DIR)semaphore.c		\
+			$(SRCS_DIR)simulation.c		\
 			$(SRCS_DIR)utils.c			\
 			$(SRCS_DIR)main.c
 
