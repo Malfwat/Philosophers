@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:13 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/02 17:01:26 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:16:19 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_philo(t_philo *philo)
 		return ;
 	close_sem(philo->supervise.sem_fed, SEM_FED);
 	close_sem(philo->supervise.sem_death, SEM_DEATH);
-	close_sem(philo->supervise.sem_death, SEM_CUTLERY);
+	close_sem(philo->cutlery, SEM_CUTLERY);
 	free(philo);
 }
 
