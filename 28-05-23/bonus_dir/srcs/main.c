@@ -6,11 +6,12 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:44:20 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/02 14:09:51 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:14:41 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosopher_bonus.h>
+#include <stdlib.h>
 
 int	main(int ac, char **av)
 {
@@ -20,10 +21,12 @@ int	main(int ac, char **av)
 	philo = create_philo(ac, av);
 	if (!philo)
 		return (2);
-	tab = ft_calloc(philo->params.nb_philo, sizeof(pid_t));
+	tab = ft_calloc(philo->params.nb_philo + 1, sizeof(pid_t));
 	if (!tab)
 		return (free_philo(philo), 2);
 	launch_philo(philo, tab);
+	wait_children(tab);
 	free_philo(philo);
+	free(tab);
 	return (0);
 }

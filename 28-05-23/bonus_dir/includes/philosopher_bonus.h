@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:10:33 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/02 14:10:02 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:09:35 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	close_sem(sem_t *sem, char *sem_name);
 bool	init_sem(sem_t **sem, char *sem_name, int nb);
 bool	init_params(t_params *params, int ac, char **av);
 void	launch_philo(t_philo *philo, pid_t *tab);
+void	wait_children(pid_t *array);
 
 #endif /* PHILOSOPHER_BONUS_H */
