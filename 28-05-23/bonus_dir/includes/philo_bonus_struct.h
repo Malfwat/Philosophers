@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:31 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/31 14:44:38 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 13:40:42 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <semaphore.h>
 # include <pthread.h>
+# include <stdbool.h>
+# include <philo_bonus_defines.h>
 
 typedef struct s_params
 {
@@ -41,7 +43,6 @@ typedef struct s_philo
 	bool		stop;
 	int			index; // from 1 to nb philo
 	sem_t		*cutlery; // nb philo cutlery represented in tab with sem at 1
-	char		**sem_names;
 	t_over		supervise;
 	t_params	params;
 }t_philo;

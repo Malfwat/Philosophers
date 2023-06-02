@@ -6,12 +6,12 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:29 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/31 14:41:35 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:56:30 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo_structs.h>
-#include <philo_defines.h>
+#include <philo_bonus_struct.h>
+#include <philo_bonus_defines.h>
 #include <stdbool.h>
 #include <stdio.h>
 

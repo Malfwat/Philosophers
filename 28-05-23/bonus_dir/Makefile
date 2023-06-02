@@ -6,7 +6,7 @@
 #    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/29 18:16:50 by amouflet         ###   ########.fr        #
+#    Updated: 2023/06/02 13:54:30 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,12 @@ NAME = ../philo_bonus
 
 SRCS_DIR	=	srcs/
 
-SRCS	=	$(SRCS_DIR)action.c \
-			$(SRCS_DIR)ft_calloc.c \
-			$(SRCS_DIR)main.c \
-			$(SRCS_DIR)cutlery.c \
-			$(SRCS_DIR)my_print.c \
-			$(SRCS_DIR)parse_params.c \
-			$(SRCS_DIR)simulation.c \
-			$(SRCS_DIR)table.c \
-			$(SRCS_DIR)time.c \
-			$(SRCS_DIR)ending.c
+SRCS	=	$(SRCS_DIR)create_table.c	\
+			$(SRCS_DIR)ft_calloc.c		\
+			$(SRCS_DIR)parse_params.c	\
+			$(SRCS_DIR)semaphore.c		\
+			$(SRCS_DIR)utils.c			\
+			$(SRCS_DIR)main.c
 
 CFLAGS	=	-Wall -Wextra -Werror -g3 -MMD -MP 
 

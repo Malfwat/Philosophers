@@ -6,18 +6,18 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:46:28 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/31 14:48:10 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 13:53:39 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	free_tab(char **tab)
-[
+void	free_tab(void **tab)
+{
 	int	i;
 
 	i = 0;
 	while (tab && tab[i])
 		free(tab[i++]);
 	free(tab);
-]
+}

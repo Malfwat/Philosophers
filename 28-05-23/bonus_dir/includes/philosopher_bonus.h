@@ -6,15 +6,22 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:10:33 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/31 14:48:26 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:55:44 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_BONUS_H
 # define PHILOSOPHER_BONUS_H
 
-void	*ft_calloc(size_t nmemb, size_t size);
-void	free_tab(char **tab);
+# include <philo_bonus_struct.h>
+# include <philo_bonus_defines.h>
 
+void	*ft_calloc(size_t nmemb, size_t size);
+
+t_philo	*create_philo(int ac, char **av);
+void	free_philo(t_philo *philo);
+void	close_sem(sem_t *sem, char *sem_name);
+bool	init_sem(sem_t **sem, char *sem_name, int nb);
+bool	init_params(t_params *params, int ac, char **av);
 
 #endif /* PHILOSOPHER_BONUS_H */
