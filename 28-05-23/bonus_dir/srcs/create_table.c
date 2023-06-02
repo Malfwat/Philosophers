@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:13 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/02 13:33:58 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:01:26 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	init_t_over(t_over *supervise)
 	if (!init_sem(&supervise->sem_death, SEM_DEATH, 0))
 		return (false);
 	if (!init_sem(&supervise->sem_fed, SEM_FED, 0))
-		return (close_sem(supervise->sem_fed, SEM_FED), false);
+		return (close_sem(supervise->sem_death, SEM_DEATH), false);
 	if (pthread_mutex_init(&supervise->stop, NULL))
 		return (close_t_over(supervise), false);
 	return (true);
