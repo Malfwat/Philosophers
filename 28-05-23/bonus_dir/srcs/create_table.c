@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:13 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/02 17:16:19 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:37:46 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	close_t_over(t_over *supervise)
 {
 	close_sem(supervise->sem_fed, SEM_FED);
 	close_sem(supervise->sem_death, SEM_DEATH);
+}
+
+sem_t	**init_sem_fed(int nb)
+{
+
 }
 
 bool	init_t_over(t_over *supervise)

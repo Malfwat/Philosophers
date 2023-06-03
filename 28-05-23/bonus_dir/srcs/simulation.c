@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:54:58 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/02 16:22:42 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:40:52 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void	simulation(t_philo *philo)
 {
+	philo->last_meal = philo->start;
 	printf("je suis %i\n", philo->index);
 	free_philo(philo);
 	exit(0);
@@ -49,6 +50,7 @@ void	launch_philo(t_philo *philo, pid_t *tab)
 	int	i;
 
 	i = 0;
+	philo->start = get
 	while (i < philo->params.nb_philo)
 	{
 		tab[i] = fork();
