@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:31 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/03 19:36:35 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/05 18:02:54 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_end_of_simulation
 	pthread_t		check_fed;
 	sem_t			*sem_death; // just one sem initialized at 0 and if someone died he has to do nb post so everyone can stop
 	sem_t			**sem_fed; // nb of philo initialized a nb philo so each philo will pass by each case so they know when the simulation is over
+	char			**fed_sem_names;
 	// pthread_mutex_t	death_mut; // so the thread can modify the semaphore
 	// pthread_mutex_t	fed_mut; // so the thread can modify the semaphore by waiting
 	pthread_mutex_t	stop_mutx;
