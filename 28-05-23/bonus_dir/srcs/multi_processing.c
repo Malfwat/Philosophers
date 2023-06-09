@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:38:46 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/03 19:34:09 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 11:21:57 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ bool	check_death_ending(t_philo *philo)
 
 bool	are_fed_up(t_philo *philo)
 {
+	int	i;
+
+	i = 0;
 	while (i < philo->params.nb_philo)
-	{
-		sem_wait
-	}
-	
+		sem_wait(philo->supervise.sem_fed[i++]);
+	return (true);
 }
 
 //////////////////////////////////////////////////////
