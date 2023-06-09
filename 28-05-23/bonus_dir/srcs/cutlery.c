@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:43:08 by malfwa            #+#    #+#             */
-/*   Updated: 2023/06/09 21:59:57 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 22:27:30 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	get_cutlery(t_philo *philo)
 		sem_post(philo->cutlery);
 		waiting(philo, philo->start, philo->params.dying + 1);
 		sem_post(philo->sem_to_take);
-		return (is_dead(philo));
+		return (is_dead(philo), false);
 	}
 	sem_wait(philo->cutlery);
 	sem_post(philo->sem_to_take);

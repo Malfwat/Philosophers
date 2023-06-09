@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:54:58 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:59:08 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 22:41:25 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ bool	launch_thread(t_philo *philo)
 {
 	if (pthread_create(&philo->supervise.check_death, NULL, check_death_ending, philo))
 		return (false);
-	pthread_detach(philo->supervise.check_death);
 	if (pthread_create(&philo->supervise.check_fed, NULL, are_fed_up, philo))
 		return (false);
-	pthread_detach(philo->supervise.check_fed);
 	return (true);
 }
 
@@ -61,7 +59,6 @@ void	simulation(t_philo *philo)
 		exit (0);
 	}
 	spread_launch(philo);
-	// my_print(philo, "");
 	while (!is_dead(philo) && !is_death(philo))
 	{
 		if (!action[i])
@@ -69,6 +66,10 @@ void	simulation(t_philo *philo)
 		if (!action[i++](philo))
 			break ;
 	}
+	incremt_sem(philo->supervise.sem_death, 1);
+	incremt_sem(philo->supervise.sem_fed[philo->index - 1], philo->params.nb_philo);
+	pthread_join(philo->supervise.check_death, NULL);
+	pthread_join(philo->supervise.check_fed, NULL);
 	free_philo(philo);
 	exit(0);
 }
