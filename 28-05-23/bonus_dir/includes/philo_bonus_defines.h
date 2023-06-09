@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:14:30 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 12:19:27 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:05:15 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define NB_MAX_PHILO 300
 # define TIME_MIN 60
 # define INFINITE -1
-# define LAUNCH_LAPS 150
+# define LAUNCH_LAPS 200
 
 typedef long long t_time;
 

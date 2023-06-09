@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:54:58 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 12:35:42 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:26:56 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,26 @@ void	spread_launch(t_philo *philo)
 
 void	simulation(t_philo *philo)
 {
+	t_action	action[4];
+	int			i;
+
+	i = 0;
 	philo->last_meal = philo->start;
+	get_action_tab(action);
 	synchronize_launch(philo->start);
 	spread_launch(philo);
-	printf("je suis %i\n", philo->index);
+	// my_print(philo, "");
+	is_dead(philo);
+	while (/* !is_death(philo) */ action[i])
+	{
+		if (!action[i])
+			i = 0;
+		is_dead(philo);
+		if (!action[i](philo))
+			break ;
+		is_dead(philo);
+		i++;
+	}
 	free_philo(philo);
 	exit(0);
 }

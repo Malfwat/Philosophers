@@ -6,7 +6,7 @@
 #    By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/27 09:33:56 by malfwa            #+#    #+#              #
-#    Updated: 2023/06/09 12:33:59 by malfwa           ###   ########.fr        #
+#    Updated: 2023/06/09 21:08:03 by malfwa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SRCS	=	$(SRCS_DIR)create_table.c		\
 			$(SRCS_DIR)semaphore.c			\
 			$(SRCS_DIR)simulation.c			\
 			$(SRCS_DIR)utils.c				\
+			$(SRCS_DIR)action.c				\
 			$(SRCS_DIR)time.c				\
+			$(SRCS_DIR)cutlery.c			\
 			$(SRCS_DIR)my_print.c			\
 			$(SRCS_DIR)main.c
 

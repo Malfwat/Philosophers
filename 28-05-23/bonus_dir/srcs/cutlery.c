@@ -1,0 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cutlery.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/09 20:43:08 by malfwa            #+#    #+#             */
+/*   Updated: 2023/06/09 20:53:14 by malfwa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <philosopher_bonus.h>
+#include <philo_bonus_time.h>
+#include <philo_bonus_struct.h>
+#include <semaphore.h>
+
+void	drop_cutlery(sem_t *cutlery)
+{
+	sem_post(cutlery);
+	sem_post(cutlery);
+}
+
+bool	get_cutlery(t_philo *philo)
+{
+	sem_wait(philo->cutlery);
+	is_dead(philo);
+	if (is_death(philo))
+	{
+		sem_post(philo->cutlery);
+		return (false);
+	}
+	my_print(philo, "has taken a fork");
+	if (philo->params.nb_philo == 1)
+	{
+		sem_post(philo->cutlery);
+		waiting(philo, philo->start, philo->params.dying + 1);
+		return (is_dead(philo));
+	}
+	sem_wait(philo->cutlery);
+	is_dead(philo);
+	if (is_death(philo))
+		return (drop_cutlery(philo->cutlery), false);
+	philo->last_meal = get_time_point();
+	return (true);	
+}
