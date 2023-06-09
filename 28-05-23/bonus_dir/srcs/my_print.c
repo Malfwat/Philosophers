@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_bonus_defines.h                              :+:      :+:    :+:   */
+/*   my_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 11:14:30 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 12:19:27 by malfwa           ###   ########.fr       */
+/*   Created: 2023/06/09 12:14:00 by malfwa            #+#    #+#             */
+/*   Updated: 2023/06/09 12:31:43 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_BONUS_DEFINES
-# define PHILO_BONUS_DEFINES
+#include <philo_bonus_struct.h>
+#include <philo_bonus_time.h>
+#include <philosopher_bonus.h>
+#include <semaphore.h>
+#include <stdio.h>
 
-# define SEM_DEATH "/sem de la mort qui tue"
-# define SEM_PRINT "/sem qui print"
-# define SEM_CUTLERY "/sem des couverts"
+void	my_print(t_philo *philo, char *str)
+{
+	t_time	time;
 
-# define INT_MAX_LEN 10
-# define NB_MAX_PHILO 300
-# define TIME_MIN 60
-# define INFINITE -1
-# define LAUNCH_LAPS 150
-
-typedef long long t_time;
-
-#endif /* PHILO_BONUS_DEFINES */
+	sem_wait(philo->sem_print);
+	time = get_timestamp_in_millisec(philo->start);
+	if (!is_death(philo))
+		printf("%-7.03lli %i %s\n", time, philo->index, str);
+	sem_post(philo->sem_print);
+}

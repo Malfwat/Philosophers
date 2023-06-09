@@ -6,11 +6,13 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:38:46 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 11:21:57 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 12:34:34 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus_struct.h>
+#include <philo_bonus_time.h>
+#include <philosopher_bonus.h>
 
 ////////////////// in a thread ///////////////////////
 
@@ -52,6 +54,16 @@ bool	set_death(t_philo *philo)
 {
 	incremt_sem(philo->supervise.sem_death, philo->params.nb_philo);
 	return (false);
+}
+
+bool	is_death(t_philo *philo)
+{
+	bool	exit_value;
+
+	pthread_mutex_lock(&philo->supervise.stop_mutx);
+	exit_value = philo->supervise.stop;
+	pthread_mutex_unlock(&philo->supervise.stop_mutx);
+	return (exit_value);
 }
 
 bool	is_dead(t_philo *philo)

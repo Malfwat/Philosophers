@@ -6,12 +6,13 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:13:43 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/03 19:21:35 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 12:33:29 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus_defines.h>
-#include <philo_bonus_structs.h>
+#include <philo_bonus_struct.h>
+#include <philosopher_bonus.h>
 #include <sys/time.h>
 #include <stdbool.h>
 #include <unistd.h>
@@ -48,7 +49,7 @@ bool	waiting(t_philo *philo, t_time time_point, t_time to_wait)
 	while (get_timestamp_in_millisec(time_point) < to_wait)
 	{
 		is_dead(philo);
-		if (is_death(philo->table))
+		if (is_death(philo))
 			return (false);
 		usleep(500);
 	}

@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:31 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/05 18:02:54 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 12:13:06 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_params
 
 typedef struct s_end_of_simulation
 {
-	bool		stop;
+	bool			stop;
 	pthread_t		check_death;
 	pthread_t		check_fed;
 	sem_t			*sem_death; // just one sem initialized at 0 and if someone died he has to do nb post so everyone can stop
@@ -44,11 +44,12 @@ typedef struct s_philo
 {
 	int			index; // from 1 to nb philo
 	sem_t		*cutlery; // nb philo cutlery represented in tab with sem at 1
+	sem_t		*sem_print;
 	t_over		supervise;
 	t_time		start;
 	t_time		last_meal;
 	t_params	params;
-	pthread_mutex_t	eat_mutx;
+	// pthread_mutex_t	eat_mutx;
 }t_philo;
 
 #endif /* PHILO_BONUS_STRUCT_H */
