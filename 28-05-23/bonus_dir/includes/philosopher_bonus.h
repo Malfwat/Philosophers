@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:10:33 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:20:03 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:42:26 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ bool	get_cutlery(t_philo *philo);
 void	drop_cutlery(sem_t *cutlery);
 void	get_action_tab(t_action *tab);
 void	incremt_sem(sem_t *sem, int count_to_add);
-bool	are_fed_up(t_philo *philo);
+void	*are_fed_up(void *ptr);
+void	*check_death_ending(void *ptr);
 void	add_meal(t_philo *philo);
 
 #endif /* PHILOSOPHER_BONUS_H */

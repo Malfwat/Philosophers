@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:54:58 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:26:56 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:59:08 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,22 @@
 #include <philo_bonus_struct.h>
 #include <philo_bonus_time.h>
 #include <philosopher_bonus.h>
+#include <pthread.h>
 #include <stdbool.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+
+bool	launch_thread(t_philo *philo)
+{
+	if (pthread_create(&philo->supervise.check_death, NULL, check_death_ending, philo))
+		return (false);
+	pthread_detach(philo->supervise.check_death);
+	if (pthread_create(&philo->supervise.check_fed, NULL, are_fed_up, philo))
+		return (false);
+	pthread_detach(philo->supervise.check_fed);
+	return (true);
+}
 
 void	spread_launch(t_philo *philo)
 {
@@ -43,18 +55,19 @@ void	simulation(t_philo *philo)
 	philo->last_meal = philo->start;
 	get_action_tab(action);
 	synchronize_launch(philo->start);
+	if (!launch_thread(philo))
+	{
+		free_philo(philo);
+		exit (0);
+	}
 	spread_launch(philo);
 	// my_print(philo, "");
-	is_dead(philo);
-	while (/* !is_death(philo) */ action[i])
+	while (!is_dead(philo) && !is_death(philo))
 	{
 		if (!action[i])
 			i = 0;
-		is_dead(philo);
-		if (!action[i](philo))
+		if (!action[i++](philo))
 			break ;
-		is_dead(philo);
-		i++;
 	}
 	free_philo(philo);
 	exit(0);

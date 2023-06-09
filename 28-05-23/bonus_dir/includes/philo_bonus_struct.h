@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:31 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:11:17 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:52:48 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	int			nb_meal_eaten;
 	sem_t		*cutlery; // nb philo cutlery represented in tab with sem at 1
 	sem_t		*sem_print;
+	sem_t		*sem_to_take;
 	t_over		supervise;
 	t_time		start;
 	t_time		last_meal;

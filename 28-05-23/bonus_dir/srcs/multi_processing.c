@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:38:46 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:28:23 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:57:43 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,35 @@
 
 ////////////////// in a thread ///////////////////////
 
-bool	check_death_ending(t_philo *philo)
+void	*check_death_ending(void *ptr)
 {
+	t_philo	*philo;
+
+	philo = (t_philo *)ptr;
 	sem_wait(philo->supervise.sem_death);
 	pthread_mutex_lock(&philo->supervise.stop_mutx);
 	philo->supervise.stop = true;
 	pthread_mutex_unlock(&philo->supervise.stop_mutx);
-	return (true);
+	return (NULL);
 }
 
 //////////////////////////////////////////////////////
 
 ///////////////// in another thread //////////////////
 
-bool	are_fed_up(t_philo *philo)
+void	*are_fed_up(void *ptr)
 {
 	int	i;
+	t_philo	*philo;
 
+	philo = (t_philo *)ptr;
 	i = 0;
 	while (i < philo->params.nb_philo)
 		sem_wait(philo->supervise.sem_fed[i++]);
-	return (true);
+	pthread_mutex_lock(&philo->supervise.stop_mutx);
+	philo->supervise.stop = true;
+	pthread_mutex_unlock(&philo->supervise.stop_mutx);
+	return (NULL);
 }
 
 //////////////////////////////////////////////////////
@@ -53,7 +61,7 @@ void	incremt_sem(sem_t *sem, int count_to_add)
 bool	set_death(t_philo *philo)
 {
 	incremt_sem(philo->supervise.sem_death, philo->params.nb_philo);
-	return (false);
+	return (true);
 }
 
 bool	is_death(t_philo *philo)
@@ -78,5 +86,5 @@ bool	is_dead(t_philo *philo)
 		my_print(philo, "died");
 		return (set_death(philo));
 	}
-	return (true);
+	return (false);
 }

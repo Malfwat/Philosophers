@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:13 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 12:25:46 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:54:15 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	free_philo(t_philo *philo)
 	close_sem_fed(&philo->supervise);
 	close_sem(philo->supervise.sem_death, SEM_DEATH);
 	close_sem(philo->sem_print, SEM_PRINT);
+	close_sem(philo->sem_to_take, SEM_TAKE);
 	close_sem(philo->cutlery, SEM_CUTLERY);
 	pthread_mutex_destroy(&philo->supervise.stop_mutx);
 	free(philo);
@@ -93,6 +94,8 @@ t_philo	*create_philo(int ac, char **av)
 	if (!init_sem(&new->cutlery, SEM_CUTLERY, new->params.nb_philo))
 		return (free_philo(new), NULL);
 	if (!init_sem(&new->sem_print, SEM_PRINT, 1))
+		return (free_philo(new), NULL);
+	if (!init_sem(&new->sem_to_take, SEM_TAKE, 1))
 		return (free_philo(new), NULL);
 	return (new);
 }

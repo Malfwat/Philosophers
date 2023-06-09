@@ -6,7 +6,7 @@
 /*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:14:30 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:05:15 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/09 21:53:07 by malfwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_BONUS_DEFINES
 
 # define SEM_DEATH "/sem de la mort qui tue"
+# define SEM_TAKE "/sem pour split"
 # define SEM_PRINT "/sem qui print"
 # define SEM_CUTLERY "/sem des couverts"
 
