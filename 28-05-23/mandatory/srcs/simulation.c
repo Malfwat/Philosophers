@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 20:00:34 by malfwa            #+#    #+#             */
-/*   Updated: 2023/06/09 21:03:46 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:31:38 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	simulation(t_supervisor *supervisor)
 {
 	int	i;
 
-	// supervisor->table->start = get_time_point();
 	supervisor->table->start = get_departure_time \
 	(supervisor->table->params.nb_of_philo);
 	i = -1;
