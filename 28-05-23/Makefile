@@ -6,22 +6,23 @@
 #    By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/29 12:02:08 by malfwa            #+#    #+#              #
-#    Updated: 2023/05/29 18:18:29 by amouflet         ###   ########.fr        #
+#    Updated: 2023/06/12 18:34:35 by amouflet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 
-all:	$(NAME)
-
 $(NAME):
 	@make -C mandatory
+
+all:	$(NAME) bonus
 
 bonus:
 	@make -C bonus_dir
 	
 clean:
 	@make clean -C mandatory/
+	@make clean -C bonus/
 
 fclean:
 	@make fclean -C mandatory/
