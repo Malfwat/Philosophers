@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   multi_processing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:38:46 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:57:43 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:28:42 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus_struct.h>
 #include <philo_bonus_time.h>
+#include <signal.h>
 #include <philosopher_bonus.h>
+#include <sys/wait.h>
 
 ////////////////// in a thread ///////////////////////
 
@@ -34,7 +36,7 @@ void	*check_death_ending(void *ptr)
 
 void	*are_fed_up(void *ptr)
 {
-	int	i;
+	int		i;
 	t_philo	*philo;
 
 	philo = (t_philo *)ptr;
@@ -48,43 +50,21 @@ void	*are_fed_up(void *ptr)
 }
 
 //////////////////////////////////////////////////////
-void	incremt_sem(sem_t *sem, int count_to_add)
+
+void	infanticide(pid_t *array)
 {
 	int	i;
 
 	i = 0;
-	while (i++ < count_to_add)
-		sem_post(sem);
+	while (array[i] && array[i] != -1)
+		kill(SIGKILL, array[i++]);
 }
 
-
-bool	set_death(t_philo *philo)
+void	wait_children(pid_t *array)
 {
-	incremt_sem(philo->supervise.sem_death, philo->params.nb_philo);
-	return (true);
-}
+	int	i;
 
-bool	is_death(t_philo *philo)
-{
-	bool	exit_value;
-
-	pthread_mutex_lock(&philo->supervise.stop_mutx);
-	exit_value = philo->supervise.stop;
-	pthread_mutex_unlock(&philo->supervise.stop_mutx);
-	return (exit_value);
-}
-
-bool	is_dead(t_philo *philo)
-{
-	t_time	time_to_die;
-	t_time	time_point;
-
-	time_to_die = philo->params.dying;
-	time_point = philo->last_meal;
-	if (get_timestamp_in_millisec(time_point) > time_to_die)
-	{
-		my_print(philo, "died");
-		return (set_death(philo));
-	}
-	return (false);
+	i = 0;
+	while (array[i] && array[i] != -1)
+		waitpid(array[i++], NULL, 0);
 }

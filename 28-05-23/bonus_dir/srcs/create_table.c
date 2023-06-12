@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:13 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/12 17:15:27 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:45:21 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ bool	init_sem_fed(t_philo *philo, int nb)
 		philo->supervise.fed_sem_names[i] = ft_itoa(i);
 		if (!philo->supervise.fed_sem_names[i])
 			return (close_sem_fed(&philo->supervise), false);
-		if (!init_sem(&philo->supervise.sem_fed[i], philo->supervise.fed_sem_names[i], 0))
+		if (!init_sem(&philo->supervise.sem_fed[i], \
+			philo->supervise.fed_sem_names[i], 0))
 			return (close_sem_fed(&philo->supervise), false);
 		i++;
 	}

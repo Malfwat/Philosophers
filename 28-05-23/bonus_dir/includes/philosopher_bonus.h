@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:10:33 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:42:26 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:29:05 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ void	incremt_sem(sem_t *sem, int count_to_add);
 void	*are_fed_up(void *ptr);
 void	*check_death_ending(void *ptr);
 void	add_meal(t_philo *philo);
+bool	set_death(t_philo *philo);
+void	infanticide(pid_t *array);
+void	wait_children(pid_t *array);
 
 #endif /* PHILOSOPHER_BONUS_H */

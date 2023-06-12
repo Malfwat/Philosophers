@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cutlery.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:43:08 by malfwa            #+#    #+#             */
-/*   Updated: 2023/06/09 22:27:30 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:20:08 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ bool	get_cutlery(t_philo *philo)
 	if (is_dead(philo) || is_death(philo))
 		return (drop_cutlery(philo->cutlery), false);
 	philo->last_meal = get_time_point();
-	return (true);	
+	return (true);
 }

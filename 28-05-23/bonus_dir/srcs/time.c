@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:13:43 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 12:33:29 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:25:17 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_time	get_departure_time(int table_len)
 void	synchronize_launch(t_time time)
 {
 	while (time > get_time_point())
-		usleep(500);
+		usleep(400);
 }
 
 bool	waiting(t_philo *philo, t_time time_point, t_time to_wait)

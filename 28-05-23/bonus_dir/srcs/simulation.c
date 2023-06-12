@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:54:58 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 22:41:25 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:29:22 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 
 bool	launch_thread(t_philo *philo)
 {
-	if (pthread_create(&philo->supervise.check_death, NULL, check_death_ending, philo))
+	if (pthread_create(&philo->supervise.check_death, \
+		NULL, check_death_ending, philo))
 		return (false);
-	if (pthread_create(&philo->supervise.check_fed, NULL, are_fed_up, philo))
+	if (pthread_create(&philo->supervise.check_fed, \
+		NULL, are_fed_up, philo))
 		return (false);
 	return (true);
 }
@@ -50,14 +52,10 @@ void	simulation(t_philo *philo)
 	int			i;
 
 	i = 0;
-	philo->last_meal = philo->start;
 	get_action_tab(action);
 	synchronize_launch(philo->start);
 	if (!launch_thread(philo))
-	{
-		free_philo(philo);
-		exit (0);
-	}
+		return (free_philo(philo), exit(0));
 	spread_launch(philo);
 	while (!is_dead(philo) && !is_death(philo))
 	{
@@ -67,29 +65,11 @@ void	simulation(t_philo *philo)
 			break ;
 	}
 	incremt_sem(philo->supervise.sem_death, 1);
-	incremt_sem(philo->supervise.sem_fed[philo->index - 1], philo->params.nb_philo);
+	incremt_sem(philo->supervise.sem_fed[philo->index - 1], \
+	philo->params.nb_philo);
 	pthread_join(philo->supervise.check_death, NULL);
 	pthread_join(philo->supervise.check_fed, NULL);
-	free_philo(philo);
-	exit(0);
-}
-
-void	infanticide(pid_t *array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] && array[i] != -1)
-		kill(SIGKILL, array[i++]);
-}
-
-void	wait_children(pid_t *array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] && array[i] != -1)
-		waitpid(array[i++], NULL, 0);
+	return (free_philo(philo), exit(0));
 }
 
 void	launch_philo(t_philo *philo, pid_t *tab)
@@ -98,6 +78,7 @@ void	launch_philo(t_philo *philo, pid_t *tab)
 
 	i = 0;
 	philo->start = get_departure_time(philo->params.nb_philo);
+	philo->last_meal = philo->start;
 	while (i < philo->params.nb_philo)
 	{
 		tab[i] = fork();

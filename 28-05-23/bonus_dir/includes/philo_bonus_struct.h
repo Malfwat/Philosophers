@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus_struct.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:31 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:52:48 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:27:18 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,23 @@ typedef struct s_end_of_simulation
 	bool			stop;
 	pthread_t		check_death;
 	pthread_t		check_fed;
-	sem_t			*sem_death; // just one sem initialized at 0 and if someone died he has to do nb post so everyone can stop
-	sem_t			**sem_fed; // nb of philo initialized a nb philo so each philo will pass by each case so they know when the simulation is over
+	sem_t			*sem_death;
+	sem_t			**sem_fed;
 	char			**fed_sem_names;
-	// pthread_mutex_t	death_mut; // so the thread can modify the semaphore
-	// pthread_mutex_t	fed_mut; // so the thread can modify the semaphore by waiting
 	pthread_mutex_t	stop_mutx;
 }t_over;
 
 typedef struct s_philo
 {
-	int			index; // from 1 to nb philo
+	int			index;
 	int			nb_meal_eaten;
-	sem_t		*cutlery; // nb philo cutlery represented in tab with sem at 1
+	sem_t		*cutlery;
 	sem_t		*sem_print;
 	sem_t		*sem_to_take;
 	t_over		supervise;
 	t_time		start;
 	t_time		last_meal;
 	t_params	params;
-	// pthread_mutex_t	eat_mutx;
 }t_philo;
 
 typedef bool	(*t_action)(t_philo *);
