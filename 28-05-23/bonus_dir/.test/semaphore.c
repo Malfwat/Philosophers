@@ -6,7 +6,7 @@
 /*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:13:03 by amouflet          #+#    #+#             */
-/*   Updated: 2023/05/29 20:09:37 by amouflet         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:22:26 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(void)
 
 	sem_unlink("/empty_sem");
 	sem = sem_open("/empty_sem", O_CREAT | O_EXCL, 644, 0);
+	// sem_post(sem);
+	// sem_wait(sem);
 	if (sem == SEM_FAILED)
 		return (perror("sem_open"), 2);
 	if (!fork())
@@ -32,7 +34,7 @@ int	main(void)
 		printf("sec\n");
 		sem_close(sem);
 		exit(0);
-		sem_getvalue();
+		// sem_getvalue();
 	}
 	sleep(1);
 	printf("first\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malfwa <malfwa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amouflet <amouflet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:19:13 by amouflet          #+#    #+#             */
-/*   Updated: 2023/06/09 21:54:15 by malfwa           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:15:27 by amouflet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ bool	init_sem_fed(t_philo *philo, int nb)
 {
 	int		i;
 
-	i = 0;
 	philo->supervise.fed_sem_names = ft_calloc(nb + 1, sizeof(char *));
 	if (!philo->supervise.fed_sem_names)
 		return (false);
 	philo->supervise.sem_fed = ft_calloc(nb + 1, sizeof(sem_t *));
 	if (!philo->supervise.sem_fed)
 		return (free(philo->supervise.fed_sem_names), false);
+	i = 0;
 	while (i < nb)
 	{
 		philo->supervise.fed_sem_names[i] = ft_itoa(i);
